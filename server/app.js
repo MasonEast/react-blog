@@ -3,7 +3,7 @@ const cors = require('koa-cors')
 const bodyParser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const path = require('path')
-const { open } = require('./db/db')
+const { open } = require('./db')
 const router = require('./route')
 
 //实例化koa

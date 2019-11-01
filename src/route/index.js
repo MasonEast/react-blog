@@ -3,7 +3,7 @@
 import Header from '@/views/Header'
 import Home from '@/views/Home'
 import About from '@/views/About'
-import Aritcle from '@/views/Article'
+import Blog from '@/views/Blog'
 
 
 const routes = [
@@ -14,17 +14,15 @@ const routes = [
             {
                 path: "/home",
                 component: Home,
-                routes: [
-                    {
-                        path: "/article",
-                        component: Aritcle,
-                    },
-                ]
             },
             {
                 path: "/about",
                 component: About,
-            }
+            },
+            {
+                path: "/blog/:id",
+                component: Blog,
+            },
         ]
     },
 

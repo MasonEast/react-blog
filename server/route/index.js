@@ -2,7 +2,7 @@ const Router = require('koa-router')
 const fs = require('fs')
 const path = require('path')
 const router = new Router()
-const blog = require('../db/blog')
+const blog = require('../models/blog')
 const responseOK = require('../middlewares/responseOk')
 
 /**
@@ -31,8 +31,9 @@ router.get('/blog', async (context, next) => {
  * 添加blog
  */
 router.post('/blog', async (ctx, next) => {
-    const { title, author, content } = ctx.request.body
-    await blog.add(title, author, content)
+    console.log(ctx.request.body)
+    const { title, author, content, tags } = ctx.request.body
+    await blog.add(title, author, content, tags)
     await next()
 }, responseOK)
 
