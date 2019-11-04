@@ -23,6 +23,7 @@ const routes = [
             {
                 path: "/admin",
                 component: Admin,
+                redirect: "/admin/blogmanage",
                 routes: [
                     {
                         path: "/admin/blogmanage",

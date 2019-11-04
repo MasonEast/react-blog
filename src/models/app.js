@@ -15,6 +15,12 @@ export default {
                 ...state,
                 blogs: action.blogs
             }
+        },
+        DELETEBLOG (state, action) {
+            return {
+                ...state,
+
+            }
         }
     },
     subscriptions: {
@@ -32,5 +38,14 @@ export default {
                 blogs: response,
             });
         },
+        *deleteBlog (action, { call, put }) {
+            const response = yield call(queryData, action.payload, '/blog');
+            console.log(2)
+            console.log(response);
+            yield put({
+                type: 'GETBLOGS',
+                blogs: response,
+            });
+        }
     },
 };

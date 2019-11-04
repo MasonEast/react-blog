@@ -38,7 +38,6 @@ class Home extends Component {
                             return (
                                 <Link key={v._id} to={{
                                     pathname: `/blog/${v._id}`,
-                                    query: v._id
                                 }}>
                                     <section className="me-section">
                                         <h2 className="me-title">{v.title}</h2>

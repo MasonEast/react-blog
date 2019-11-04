@@ -4,8 +4,9 @@ import './index.less'
 class Blog extends Component {
 
     render () {
-        const { app, location } = this.props
-        let item = app.blogs.find(v => v._id === location.query)
+        console.log(this.props)
+        const { app, match } = this.props
+        let item = app.blogs.find(v => v._id === match.params.id)
         return (
             <div className="blog-box">
                 <h1>{item.title}</h1>

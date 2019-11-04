@@ -31,8 +31,8 @@ router.get('/blog', async (context, next) => {
  * 添加blog
  */
 router.post('/blog', async (ctx, next) => {
-    console.log(ctx.request.body)
-    const { title, author, content, tags } = ctx.request.body
+    console.log('post', ctx.request.query)
+    const { title, author, content, tags } = ctx.request.query
     await blog.add(title, author, content, tags)
     await next()
 }, responseOK)
@@ -40,10 +40,10 @@ router.post('/blog', async (ctx, next) => {
 /**
  * 删除blog
  */
-router.delete('/blog', async (context, next) => {
-    console.log(context.request.body)
+router.delete('/blog/:id', async (context, next) => {
+    console.log('delete', context.request.query)
 
-    await blog.deleteBlog(context.request.body.id)
+    await blog.deleteBlog(context.request.query.id)
     context.body = {
         status: 0
     }
