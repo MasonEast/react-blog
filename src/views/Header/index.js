@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Link } from 'dva/router';
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import './index.less'
-class BBB extends Component {
+class Header extends Component {
     state = {
         isActive: 'Home'
     }
@@ -42,6 +42,7 @@ class BBB extends Component {
             <div className="header-box">
                 <ul className="header-box-tab" onClick={this.changeActive}>
                     <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                    <li><Link to="/admin" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
                     <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
                 </ul>
                 <Switch>
@@ -54,4 +55,4 @@ class BBB extends Component {
     }
 }
 
-export default BBB;
+export default Header;

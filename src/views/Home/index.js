@@ -11,7 +11,6 @@ class Home extends Component {
     }
     async componentDidMount () {
         await this.props.getBlogs({ method: 'get' })
-        console.log(1111, this.props.app.blogs)
         let tags = {}
         this.props.app.blogs.forEach(item => {
             if (item.tags.length) {
@@ -26,7 +25,6 @@ class Home extends Component {
         })
         this.setState({ tags })
     }
-
 
 
     render () {
@@ -60,9 +58,19 @@ class Home extends Component {
                         {
                             Object.keys(tags).map(v => {
                                 //实现随机颜色
-                                return <Tag color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)} key={v}>
-                                    {v}({tags[v]})
+                                return (
+                                    <Link
+                                        key={v}
+                                        to={{
+                                            pathname: `/tags/${v}`,
+                                            query: v
+                                        }}
+                                    >
+                                        <Tag onClick={this.blogsForTags} color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)} >
+                                            {v}({tags[v]})
                                        </Tag>
+                                    </Link>
+                                )
                             })
                         }
 
