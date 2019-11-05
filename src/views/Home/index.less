@@ -1,9 +1,19 @@
 .home-box{
     width: 100%;
-    height: calc(100% - 6em);
-    // background-color: #ccc;
+    height: calc(100% - 50vh - 1em);
+    box-sizing: border-box;
+    margin-top: calc(50vh - 4em);
     display: flex;
     justify-content: center;
+    .home-box-top{
+        width: 100%;
+        height: 50vh;
+        z-index: -1;
+        position: absolute;
+        top: 0;
+        background: url('../../assets/img/outdoor.jpg') center no-repeat ;
+        background-size: cover;
+    }
     .home-box-left{
         width: 50%;
         height: 100%;
@@ -14,19 +24,24 @@
             position: relative;
             cursor: pointer;
             // background-color: #999;
-            border-bottom: 1px solid #999;
+            border-bottom: 1px solid #bbbaba;
             &:hover{
                 color: rgb(233, 211, 14)
             }
             .me-title{
+                color: #333;
                 font-size: 24px;
+                height: 3em;
+                line-height: 3em;
                 &:hover{
-                    color: rgb(233, 211, 14)
+                    color: rgb(31, 188, 228)
                 }
             }
             .me-detail{
-                color: #333;
+                color: #a3a3a3;
+                font-style: italic;
                 text-indent: 2em;
+                line-height: 2em;
                 overflow: hidden;
                 text-overflow: ellipsis;
                 display: -webkit-box;
@@ -34,9 +49,12 @@
                 -webkit-box-orient: vertical;
             }
             .me-submitTime{
+                font-family: Lora,'Times New Roman',serif;
+                font-style: italic;
+                font-size: 18px;
                 color: #666;
                 position: absolute;
-                bottom: 20px;
+                bottom: 10px;
                 right: 20px;
             }
         }
@@ -44,5 +62,11 @@
     .home-box-right{
         width: 20%;
         height: 100%;
+        .home-box-right-tag{
+            margin: 3px;
+            height: 3em;
+            line-height: 3em;
+            border: 1px solid #ccc
+        }
     }
 }

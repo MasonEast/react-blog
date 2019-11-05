@@ -16,7 +16,7 @@ class Header extends Component {
      * 滚动函数，判断当前滚动条是否需要头部吸顶
      */
     scrollMethod = () => {
-        let dom = document.querySelector('.header-box-tab')
+        let dom = document.querySelector('.header-box-tab-ul')
         // const sumH = document.body.scrollHeight || document.documentElement.scrollHeight
         // const viewH = document.documentElement.clientHeight
         const scrollH = document.body.scrollTop || document.documentElement.scrollTop
@@ -42,11 +42,14 @@ class Header extends Component {
     render () {
         return (
             <div className="header-box">
-                <ul className="header-box-tab" onClick={this.changeActive}>
-                    <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
-                    <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
-                    <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
-                </ul>
+                <div className="header-box-tab">
+                    <ul className="header-box-tab-ul" onClick={this.changeActive}>
+                        <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                        <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
+                        <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
+                    </ul>
+
+                </div>
                 <Switch>
                     {this.props.routes.map((route, i) => (
                         <RouteWithSubRoutes key={i} {...route} />

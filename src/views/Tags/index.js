@@ -1,6 +1,9 @@
 import { Timeline } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux'
+import './index.less'
+import { dateChange } from '@/utils'
+import { Link } from 'dva/router'
 
 const Tags = (props) => {
     const [tagsAll, setTagsAll] = useState([])
@@ -12,14 +15,17 @@ const Tags = (props) => {
 
     return (
 
-        <Timeline>
-            {tagsAll.map(item => {
-                return (
-                    <Timeline.Item key={item._id}>Create {item.title} 2015-09-01</Timeline.Item>
-                )
-            })}
-
-        </Timeline>
+        <div className="tags-box">
+            <Timeline className="tags-box-timeline">
+                {tagsAll.map(item => {
+                    return (
+                        <Timeline.Item key={item._id}>Create
+                            <Link to={`/blog/${item._id}`}> {item.title} </Link>
+                            on {dateChange(item.date)}</Timeline.Item>
+                    )
+                })}
+            </Timeline>
+        </div>
 
     )
 }

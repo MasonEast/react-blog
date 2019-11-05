@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import './index.less'
 import { Tag } from 'antd'
 import { Link } from 'dva/router';
+import { dateChange } from '@/utils'
 
 class Home extends Component {
 
@@ -26,12 +27,12 @@ class Home extends Component {
         this.setState({ tags })
     }
 
-
     render () {
         const { blogs } = this.props.app
         const { tags } = this.state
         return (
             <div className="home-box">
+                <div className="home-box-top"></div>
                 <div className="home-box-left">
                     {
                         blogs.length && blogs.map(v => {
@@ -44,7 +45,7 @@ class Home extends Component {
                                         <content className="me-detail">
                                             {v.content}
                                         </content>
-                                        <p className="me-submitTime">posted by {v.author} on 2019</p>
+                                        <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>
                                     </section>
                                 </Link>
                             )
@@ -65,7 +66,11 @@ class Home extends Component {
                                             query: v
                                         }}
                                     >
-                                        <Tag onClick={this.blogsForTags} color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)} >
+                                        <Tag
+                                            className="home-box-right-tag"
+                                            onClick={this.blogsForTags}
+                                            color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)}
+                                        >
                                             {v}({tags[v]})
                                        </Tag>
                                     </Link>

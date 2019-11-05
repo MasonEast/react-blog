@@ -4,33 +4,56 @@
     height: 100%;
     .header-box-tab{
         width: 100%;
-        height: 6em;
+        height: 4em;
+        // height: 50vh;
+        // background: url('../../assets/img/outdoor.jpg') center no-repeat ;
+        // background-size: cover;
         line-height: 6em;
-        margin: 0;
-        padding-left: 4em;
-        font-size: 18px;
-        li{
-            float: left;
-            width: 8em;
-            height: 2em;
-            a{
-                color: rgb(24, 226, 101);  
-                &:hover,
-                &:active    {
-                color:#d14949;
+        margin-bottom: 1em;
+        font-size: 20px;
+        font-weight: bold;
+        .header-box-tab-ul{
+            // position: absolute;
+            // top: 0;
+            width: 100%;
+            height: 4em;
+            line-height: 4em;
+            padding-left: 4em;
+
+            li{
+                float: left;
+                width: 6em;
+                height: 2em;
+                a{
+                    color: #333;  
+                    &:hover,
+                    &:active    {
+                    color:rgb(24, 118, 224);
+                    }
+                }
+                .active{
+                    color: rgb(24, 118, 224);
+                    // text-decoration: underline
                 }
             }
-            .active{
-                color: #ccc;
-                text-decoration: underline
-            }
         }
+        
     }
     .fixTop{
+        animation: fade 0.5s ease-in-out ;
         position: fixed;
         top: 0;
         z-index: 1;
-        background-color: #fff;
-        border-bottom: 2px solid #999;
+        opacity: 0.8;
+        background-color: rgb(255, 255, 255);
+        border-bottom: 1px solid #999;
+    }
+    @keyframes fade {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 0.6;
+        }
     }
 }
