@@ -21,7 +21,7 @@ class Blog extends Component {
                 </div>
                 <h1>{item.title}</h1>
                 <div className="blog-author">{item.author}</div>
-                <p className="blog-content">{item.content}</p>
+                <p className="blog-content" dangerouslySetInnerHTML={{ __html: item.content }}></p>
             </div>
         )
     }

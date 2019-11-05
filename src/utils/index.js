@@ -1,5 +1,13 @@
 import axios from 'axios'
-import Qs from 'qs'
+import { message } from 'antd';
+
+function alertMsg (value) {
+    if (!value) {
+        return message.success('success');
+    }
+    return message.error('error');
+
+}
 
 export async function queryData (params, url) {
     let res = await axios({
@@ -25,7 +33,6 @@ export async function deleteData (params, url) {
 }
 
 export async function submitData (params, url) {
-    console.log('axios')
     let res = await axios({
         method: 'post',
         headers: {
@@ -34,6 +41,7 @@ export async function submitData (params, url) {
         url,
         params: params.data || ''
     })
+    alertMsg(res.data.status)
     console.log(res)
     return res.data.data
 }
@@ -43,3 +51,6 @@ export function dateChange (value) {
     let date = new Date(value);
     return monthsInEng[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
 }
+
+
+

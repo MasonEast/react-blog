@@ -19,7 +19,7 @@ class BlogWrite extends Component {
         // var mdValue = value
         // var converter = new showdown.Converter();
         // var html = converter.makeHtml(mdValue);
-        document.getElementById("show-area").innerHTML = value;
+        // document.getElementById("show-area").innerHTML = value;
         this.setState({
             content: value
         })
@@ -44,26 +44,20 @@ class BlogWrite extends Component {
 
     render () {
         return (
-            <div id="area">
-                <div>
-                    <Input onChange={this.handelChange.bind(this, 'title')} placeholder="title" />
-                    <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" />
-                    <Input onChange={this.handelChange.bind(this, 'tags')} placeholder="tags" />
+            <div className="write-box">
+                <div className="write-box-input">
+                    <span>Title: <Input onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
+                    <span>Author: <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" /></span>
+                    <span>Tags: <Input onChange={this.handelChange.bind(this, 'tags')} placeholder="tags" /></span>
                 </div>
-                <table>
-                    <tr>
-                        <td><ReactQuill
-                            value={this.state.content}
-                            onChange={this.mdSwitch.bind(this)}
-                            id="md-area"
-                        />
-                        </td>
-                        <td>
-                            <div id="show-area" class="clearfix"></div>
-                        </td>
-                    </tr>
-                </table>
-                <div className="write-btn">
+                <div className="write-box-edit">
+                    <ReactQuill
+                        value={this.state.content}
+                        onChange={this.mdSwitch.bind(this)}
+                        className="write-box-edit-quill"
+                    />
+                </div>
+                <div className="write-box-btn">
                     <Button onClick={this.submitClick} type="primary">提交</Button>
                     <Button>保存</Button>
                 </div>

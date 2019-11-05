@@ -74,7 +74,7 @@ class Blogmanage extends Component {
                 key: item._id,
                 title: item.title,
                 author: item.author,
-                date: item.date,
+                date: new Date(item.date).toLocaleDateString().replace(/\//g, '-'),
                 tags: item.tags
             }
         })

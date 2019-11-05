@@ -15,6 +15,7 @@
     "koa-bodyparser": "^4.2.1",
     "koa-cors": "^0.0.16",
     "koa-router": "^7.4.0",
+    "koa-session": "^5.12.3",
     "mongoose": "^5.7.7"
   }
 }

@@ -12,16 +12,16 @@ class Admin extends Component {
             <div className="admin-box">
                 <div className="admin-left">
                     <Menu
+                        className="admin-left-menu"
                         onClick={this.handleClick}
                         style={{ width: 256 }}
-                        defaultSelectedKeys={['1']}
-                        defaultOpenKeys={['sub1']}
+                        defaultSelectedKeys={['blog']}
                         mode="vertical"
                     >
                         <Menu.Item key="blog">
                             <Link to="/admin/blogmanage">
                                 <Icon type="blog" />
-                                Blog Management
+                                Blog Manage
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="mail">

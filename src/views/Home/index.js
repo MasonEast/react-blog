@@ -42,8 +42,8 @@ class Home extends Component {
                                 }}>
                                     <section className="me-section">
                                         <h2 className="me-title">{v.title}</h2>
-                                        <content className="me-detail">
-                                            {v.content}
+                                        <content className="me-detail" dangerouslySetInnerHTML={{ __html: v.content }}>
+                                            {/* {v.content} */}
                                         </content>
                                         <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>
                                     </section>
