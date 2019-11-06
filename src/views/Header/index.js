@@ -2,15 +2,43 @@ import React, { Component } from 'react';
 import { Switch, Link } from 'dva/router';
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import './index.less'
+import LoginModal from '@/components/login-modal'
+import { connect } from 'react-redux'
 class Header extends Component {
     state = {
-        isActive: 'Home'
+        isActive: 'Home',
+        visible: false
     }
     changeActive = (e) => {
         e.persist()
         this.setState({
             isActive: e.target.innerHTML
         })
+    }
+
+    clickLogin = () => {
+        this.setState({
+            visible: true
+        })
+    }
+
+    onLogin = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    onRegister = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    onCancel = () => {
+        this.setState({
+            visible: false
+        })
+    }
+    logout = () => {
+
     }
     /**
      * 滚动函数，判断当前滚动条是否需要头部吸顶
@@ -29,7 +57,6 @@ class Header extends Component {
     }
     componentDidMount () {
         this.props.history.push("/home");
-
         window.addEventListener('scroll', this.scrollMethod)
     }
     /**
@@ -40,6 +67,7 @@ class Header extends Component {
     }
 
     render () {
+        const { isLogin, email } = this.props.app.user
         return (
             <div className="header-box">
                 <div className="header-box-tab">
@@ -47,17 +75,34 @@ class Header extends Component {
                         <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
                         <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
                         <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
+                        {
+                            isLogin
+                                ?
+                                <li style={{ width: 250 }} className="header-box-tab-login" >欢迎, {email} <span onClick={this.props.userLogout}>退出</span></li>
+                                :
+                                <li className="header-box-tab-nologin" onClick={this.clickLogin}>登录/注册</li>
+                        }
                     </ul>
-
                 </div>
                 <Switch>
                     {this.props.routes.map((route, i) => (
                         <RouteWithSubRoutes key={i} {...route} />
                     ))}
                 </Switch>
+                <LoginModal
+                    visible={this.state.visible}
+                    onLogin={this.onLogin}
+                    onRegister={this.onRegister}
+                    onCancel={this.onCancel}
+                />
             </div>
         );
     }
 }
 
-export default Header;
+export default connect(
+    ({ app }) => ({ app }),
+    dispatch => ({
+        userLogout: payload => dispatch({ type: 'app/USERLOGOUT', payload })
+    })
+)(Header);

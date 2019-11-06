@@ -7,7 +7,11 @@ export default {
 
     state: {
         name: '这是app的model',
-        blogs: []
+        blogs: [],
+        user: {
+            isLogin: 0,
+            email: ''
+        }
     },
     reducers: {
         GETBLOGS (state, action) {              //注意顺序，state在前面
@@ -20,6 +24,26 @@ export default {
             return {
                 ...state,
 
+            }
+        },
+        USERLOGIN (state, action) {
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    isLogin: action.payload.isLogin,
+                    email: action.payload.email
+                }
+            }
+        },
+        USERLOGOUT (state, action) {
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    isLogin: 0,
+                    email: ''
+                }
             }
         }
     },

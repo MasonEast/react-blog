@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd';
-
+import qs from 'qs'
 function alertMsg (value) {
     if (!value) {
         return message.success('success');
@@ -44,6 +44,26 @@ export async function submitData (params, url) {
     alertMsg(res.data.status)
     console.log(res)
     return res.data.data
+}
+
+export async function login (params, url) {
+    let data = params.data
+    let formdata = new FormData()
+    formdata.append('email', data.email)
+    formdata.append('password', data.password)
+    let res = await axios({
+        method: 'post',
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        },
+        url,
+        data: formdata || ''
+    })
+    console.log(res)
+
+    alertMsg(res.data.status)
+    return res
+
 }
 
 export function dateChange (value) {

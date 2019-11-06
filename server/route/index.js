@@ -62,6 +62,7 @@ router.post('/login', async (ctx) => {
         // 取请求url解析后的参数对象，方便比对
         // 如?nickname=post修改&passwd=123解析为{nickname:"post修改",passwd:"123"}
         const data = ctx.request.body
+        console.log(data)
         // 判断用户名密码是否为空
         if (data.email && data.password) {
             const queryEmail = await user.queryEmail(data.email)
