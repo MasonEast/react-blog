@@ -3,7 +3,7 @@ import { Modal, Form, Input, Button } from 'antd'
 import { login } from '@/utils'
 import config from '@/config'
 import { connect } from 'react-redux'
-
+import './index.less'
 class LoginModal extends Component {
 
     handleSubmit = (e) => {
@@ -23,7 +23,9 @@ class LoginModal extends Component {
             })
 
         } else {
-            console.log('register')
+            login({ data: formData }, '/register').then(res => {
+                !res.data.status && this.loginSuccess(res.data.data.email)
+            })
         }
     };
 
@@ -46,6 +48,7 @@ class LoginModal extends Component {
                 visible={visible}
                 onCancel={onCancel}
                 footer={[]}
+                className="login-modal"
             >
                 <Form onSubmit={this.handleSubmit} className="login-form">
                     <Form.Item key="email" >

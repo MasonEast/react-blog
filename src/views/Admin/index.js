@@ -25,9 +25,9 @@ class Admin extends Component {
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="mail">
-                            <Link to="/admin/mailbox">
+                            <Link to="/admin/blogdraft">
                                 <Icon type="" />
-                                Mail Box
+                                BLog Draft
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="write">
@@ -36,12 +36,12 @@ class Admin extends Component {
                                 Blog Write
                             </Link>
                         </Menu.Item>
-                        <Menu.Item key="todo">
+                        {/* <Menu.Item key="todo">
                             <Link to="/admin/todolist">
                                 <Icon type="" />
                                 Todo List
                             </Link>
-                        </Menu.Item>
+                        </Menu.Item> */}
                     </Menu>
                 </div>
                 <div className="admin-right">

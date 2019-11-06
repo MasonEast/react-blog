@@ -32,9 +32,9 @@ router.get('/blog', async (context, next) => {
  * 添加blog
  */
 router.post('/blog', async (ctx, next) => {
-    console.log('post', ctx.request.query)
-    const { title, author, content, tags } = ctx.request.query
-    await blog.add(title, author, content, tags)
+    console.log('post', ctx.request.body)
+    const { title, author, content, tags, status } = ctx.request.body
+    await blog.add(title, author, content, tags, status)
     await next()
 }, responseOK)
 
@@ -60,7 +60,6 @@ router.post('/login', async (ctx) => {
         ctx.session.logged = false;
 
         // 取请求url解析后的参数对象，方便比对
-        // 如?nickname=post修改&passwd=123解析为{nickname:"post修改",passwd:"123"}
         const data = ctx.request.body
         console.log(data)
         // 判断用户名密码是否为空
@@ -122,7 +121,7 @@ router.post('/register', async (ctx) => {
         await user.save(data)
         ctx.body = {
             status: 0,
-            data: {},
+            data,
             msg: '保存成功'
         }
     }

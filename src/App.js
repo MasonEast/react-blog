@@ -4,6 +4,7 @@ import { BrowserRouter, Switch, Redirect } from 'dva/router';
 import RouteGlobal from '@/route'
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import '@/assets/css/init.css'
+import 'react-quill/dist/quill.snow.css';
 
 export default function RouteConfigExample () {
     return (

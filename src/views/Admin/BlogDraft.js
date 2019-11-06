@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Link } from 'dva/router'
 import { deleteData } from '@/utils'
 
-class Blogmanage extends Component {
+class BlogDraft extends Component {
     constructor() {
         super(...arguments)
         this.state = {
@@ -13,7 +13,7 @@ class Blogmanage extends Component {
                     title: 'Title',
                     dataIndex: 'title',
                     key: 'title',
-                    render: (text, record) => <Link to={`/blog/${record.key}`}>{text}</Link>,
+                    // render: (text, record) => <Link to={`/blog/${record.key}`}>{text}</Link>,
                 },
                 {
                     title: 'Author',
@@ -72,7 +72,7 @@ class Blogmanage extends Component {
 
     render () {
         const { blogs, user } = this.props.app
-        const data = blogs.filter(item => item.author === user.email).map(item => {
+        const data = blogs.filter(item => item.author === user.email && item.status).map(item => {
             return {
                 key: item._id,
                 title: item.title,
@@ -87,7 +87,7 @@ class Blogmanage extends Component {
                     columns={this.state.columns}
                     dataSource={data}
                     locale={{
-                        emptyText: user.email ? '你还没有发布过blog嘞' : '登录之后才能查看自己的blog哦~'
+                        emptyText: user.email ? '草稿箱里啥都没有嘞' : '登录之后才能查看自己的blog哦~'
                     }}
                 />
             </div>
@@ -100,4 +100,4 @@ export default connect(
     dispatch => ({
         getBlogs: payload => dispatch({ type: 'app/getBlogs', payload }),                    //获取博客数据
     })
-)(Blogmanage)
+)(BlogDraft)

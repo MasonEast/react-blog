@@ -1,15 +1,38 @@
 import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { Button, Input } from 'antd'
+import { connect } from 'react-redux'
+import { Button, Input, message } from 'antd'
 import { submitData } from '@/utils'
+
 class BlogWrite extends Component {
 
     state = {
         content: '',
         title: '',
         author: '',
-        tags: ''
+        tags: '',
+        modules: {
+            toolbar: [
+                ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                ['blockquote', 'code-block'],
+                ['link', 'image'],
+
+                [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+                [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+                [{ 'script': 'sub' }, { 'script': 'super' }],      // superscript/subscript
+                [{ 'indent': '-1' }, { 'indent': '+1' }],          // outdent/indent
+                [{ 'direction': 'rtl' }],                         // text direction
+
+                // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+                [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+                [{ 'font': [] }],
+                [{ 'align': [] }],
+
+                ['clean']                                         // remove formatting button
+            ]
+        }
     }
 
 
@@ -31,13 +54,18 @@ class BlogWrite extends Component {
             [v]: e.target.value
         })
     }
-    submitClick = () => {
+    submitClick (status) {
+        const { email } = this.props.app.user
+        if (!email) {
+            return message.error('登录后才能发布博客哟~')
+        }
         submitData({
             data: {
                 title: this.state.title,
-                author: this.state.author,
+                author: email,
                 tags: this.state.tags,
-                content: this.state.content
+                content: this.state.content,
+                status
             }
         }, '/blog')
     }
@@ -47,7 +75,7 @@ class BlogWrite extends Component {
             <div className="write-box">
                 <div className="write-box-input">
                     <span>Title: <Input onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
-                    <span>Author: <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" /></span>
+                    {/* <span>Author: <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" /></span> */}
                     <span>Tags: <Input onChange={this.handelChange.bind(this, 'tags')} placeholder="tags" /></span>
                 </div>
                 <div className="write-box-edit">
@@ -55,17 +83,20 @@ class BlogWrite extends Component {
                         value={this.state.content}
                         onChange={this.mdSwitch.bind(this)}
                         className="write-box-edit-quill"
+                        modules={this.state.modules}
                     />
                 </div>
                 <div className="write-box-btn">
-                    <Button onClick={this.submitClick} type="primary">提交</Button>
-                    <Button>保存</Button>
+                    <Button onClick={this.submitClick.bind(this, 0)} type="primary">提交</Button>
+                    <Button onClick={this.submitClick.bind(this, 1)}>保存</Button>
                 </div>
             </div>
         )
     }
 }
 
-export default BlogWrite
+export default connect(
+    ({ app }) => ({ app })
+)(BlogWrite)
 
 

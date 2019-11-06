@@ -18,6 +18,10 @@ const BlogSchema = new Schema({
         type: String,
         required: true
     },
+    status: {
+        type: Number,
+        required: true
+    },
     date: {
         type: Date,
         default: +Date.now()
@@ -28,12 +32,14 @@ const Blog = mongoose.model("blog", BlogSchema)
 
 
 module.exports = {
-    async add (title, author, content, tags) {
-        let tagsArr = tags.split(',')
+    async add (title, author, content, tags, status) {
+        let tagsArr = tags.split('，')
+        let statusc = Number(status)
         return await Blog.create({
             title,
             author,
             content,
+            status: statusc,
             tags: tagsArr
         })
     },

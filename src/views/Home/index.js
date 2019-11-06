@@ -35,7 +35,7 @@ class Home extends Component {
                 <div className="home-box-top"></div>
                 <div className="home-box-left">
                     {
-                        blogs.length && blogs.map(v => {
+                        blogs.length && blogs.filter(item => item.status === 0).map(v => {
                             return (
                                 <Link key={v._id} to={{
                                     pathname: `/blog/${v._id}`,

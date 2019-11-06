@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { message } from 'antd';
-import qs from 'qs'
+
 function alertMsg (value) {
-    if (!value) {
-        return message.success('success');
+    if (!value.status) {
+        return message.success(value.msg);
     }
-    return message.error('error');
+    return message.error(value.msg);
 
 }
 
@@ -33,17 +33,26 @@ export async function deleteData (params, url) {
 }
 
 export async function submitData (params, url) {
+    let data = params.data
+    let formdata = new FormData()
+    formdata.append('title', data.title)
+    formdata.append('author', data.author)
+    formdata.append('tags', data.tags)
+    formdata.append('status', data.status)
+    formdata.append('content', data.content)
+
     let res = await axios({
         method: 'post',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'multipart/form-data'
         },
         url,
-        params: params.data || ''
+        data: formdata || ''
     })
-    alertMsg(res.data.status)
     console.log(res)
-    return res.data.data
+
+    alertMsg(res.data)
+    return res
 }
 
 export async function login (params, url) {
@@ -61,7 +70,7 @@ export async function login (params, url) {
     })
     console.log(res)
 
-    alertMsg(res.data.status)
+    alertMsg(res.data)
     return res
 
 }

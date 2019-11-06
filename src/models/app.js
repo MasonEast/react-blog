@@ -17,7 +17,7 @@ export default {
         GETBLOGS (state, action) {              //注意顺序，state在前面
             return {
                 ...state,
-                blogs: action.blogs
+                blogs: action.blogs.reverse()
             }
         },
         DELETEBLOG (state, action) {
