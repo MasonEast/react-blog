@@ -9,11 +9,9 @@ class LoginModal extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         e.persist()
-        console.log(e)
         let formData = ''
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
                 formData = values
             }
         });

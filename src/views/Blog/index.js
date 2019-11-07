@@ -7,7 +7,6 @@ class Blog extends Component {
 
 
     render () {
-        console.log(this.props)
         const { app, match } = this.props
         let item = app.blogs.find(v => v._id === match.params.id)
 

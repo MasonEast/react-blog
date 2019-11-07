@@ -55,21 +55,10 @@ export default {
 
         *getBlogs (action, { call, put }) {
             const response = yield call(request, action.payload, requestURL.blog);
-            console.log(2)
-            console.log(response);
             yield put({
                 type: 'GETBLOGS',
                 blogs: response.data,
             });
         },
-        // *deleteBlog (action, { call, put }) {
-        //     const response = yield call(queryData, action.payload, '/blog');
-        //     console.log(2)
-        //     console.log(response);
-        //     yield put({
-        //         type: 'GETBLOGS',
-        //         blogs: response,
-        //     });
-        // }
     },
 };

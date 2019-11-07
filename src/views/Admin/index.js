@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Menu, Icon } from 'antd';
+import { Menu } from 'antd';
 import { Switch, Link } from 'dva/router';
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import './index.less'
 class Admin extends Component {
-    handleClick = e => {
-        console.log('click ', e);
-    };
+
     render () {
         return (
             <div className="admin-box">

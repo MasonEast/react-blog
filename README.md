@@ -1,68 +1,67 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Blog-React
 
-## Available Scripts
+> 一个 React + node 的**初/中级**练习项目：可以多人共用的博客系统
 
-In the project directory, you can run:
+[**在线预览**](http://47.100.38.254/)
+![图片预览](public/home.png)
+![图片预览](public/manage.png)
+![图片预览](public/write.png)
+---
 
-### `npm start`
+## 技术栈
+react + antd + dva + node + koa + mongoose
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 麻雀虽小，五脏俱全
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+- [x] 前台：主页 + 列表页 + 标签页 + 博客管理 + 写博客 + 草稿箱
+- [x] 后台：文章管理 + 用户管理
+- [x] 登录注册， 管理自己的个人博客，查看所有发布的博客
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 目录结构
 
-### `npm run build`
+```js
+.
+│
+├─config                // 构建配置
+├─public                // html 入口
+├─scripts               // 项目脚本
+└─server                // 后端
+    ├─config            // 项目配置 
+    ├─db                // 连接数据库
+    ├─middlewares       // 中间件
+    ├─models            // 数据库模型
+    ├─route            // 路由
+    ├─  app.js          // 后端主入口文件
+    └─...
+│
+└─src                   // 前端项目源码
+   ├─assets             // 静态文件
+   ├─components         // 公用组件
+   ├─config             // 公共数据常量
+   ├─models             // dva的models， 整合了state， reducer， redux-saga
+   ├─route              // 路由
+   ├─utils              // 工具包
+   ├─views              // 视图层
+   ├─  App.js           // 项目入口文件
+   ├─  index.js         // 主入口文件，引入dva
+   └─...
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## 使用这个项目
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/MasonEast/react-blog.git
 
-### `npm run eject`
+## 安装依赖以及开启开发模式
+cd blog-react
+npm i 
+npm start
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 启动node服务本地要先安装mongodb数据库，并启动
+cd server
+npm i 
+node app
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+```

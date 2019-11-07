@@ -65,13 +65,11 @@ class Blogmanage extends Component {
         this.props.getBlogs({ url: requestURL.blog })
     }
     goDraft (record) {
-        console.log(record)
         let content = this.props.app.blogs.find(item => item._id === record.key).content
         this.props.history.push({
             pathname: 'blogwrite',
             state: { record, content }
         })
-        console.log(this.props)
     }
     componentDidMount () {
         this.props.getBlogs({ url: requestURL.blog })
