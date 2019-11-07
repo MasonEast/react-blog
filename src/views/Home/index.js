@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './index.less'
 import { Tag } from 'antd'
 import { Link } from 'dva/router';
-import { dateChange, request } from '@/utils'
+import { dateChange, request, translateMarkdown } from '@/utils'
 import { requestURL } from '@/config'
 class Home extends Component {
 
@@ -35,7 +35,7 @@ class Home extends Component {
                                 }}>
                                     <section className="me-section">
                                         <h2 className="me-title">{v.title}</h2>
-                                        <content className="me-detail" dangerouslySetInnerHTML={{ __html: v.content }}>
+                                        <content className="me-detail" dangerouslySetInnerHTML={{ __html: translateMarkdown(v.content) }}>
                                             {/* {v.content} */}
                                         </content>
                                         <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>

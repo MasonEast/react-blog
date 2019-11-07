@@ -8,7 +8,6 @@ import Tags from '@/views/Tags'
 import Admin from '@/views/Admin'
 import Blogmanage from '@/views/Admin/Blogmanage'
 import BlogWrite from '@/views/Admin/BlogWrite'
-// import BlogDraft from '@/views/Admin/BlogDraft'
 
 const routes = [
     {

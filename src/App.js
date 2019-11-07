@@ -1,10 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Switch, Redirect } from 'dva/router';
-// import dynamic from 'dva/dynamic'      //参数： app： dva实例
 import RouteGlobal from '@/route'
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import '@/assets/css/init.css'
-import 'react-quill/dist/quill.snow.css';
+import 'highlight.js/styles/github.css';
 
 export default function RouteConfigExample () {
     return (

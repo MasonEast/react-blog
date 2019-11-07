@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva'
 import './index.less'
-
+import { translateMarkdown } from '@/utils'
 import { Tag } from 'antd'
 class Blog extends Component {
 
@@ -23,7 +23,7 @@ class Blog extends Component {
                 </div>
                 <h1>{item.title}</h1>
                 <div className="blog-author">{item.author}</div>
-                <p className="blog-content" dangerouslySetInnerHTML={{ __html: item.content }}></p>
+                <p className="blog-content" dangerouslySetInnerHTML={{ __html: translateMarkdown(item.content) }}></p>
             </div>
         )
     }

@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { message } from 'antd';
+import marked from 'marked'
 
 function alertMsg (value) {
     if (!value.status) {
@@ -41,6 +42,26 @@ export function dateChange (value) {
     let monthsInEng = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     let date = new Date(value);
     return monthsInEng[date.getMonth()] + ' ' + date.getDate() + ', ' + date.getFullYear()
+}
+
+
+
+// 转化 md 语法为 html
+export const translateMarkdown = (plainText, isGuardXss = false) => {
+    return marked(isGuardXss ? xss(plainText) : plainText, {
+        renderer: new marked.Renderer(),
+        gfm: true,
+        pedantic: false,
+        sanitize: false,
+        tables: true,
+        breaks: true,
+        smartLists: true,
+        smartypants: true,
+        highlight: function (code) {
+            /*eslint no-undef: "off"*/
+            return hljs.highlightAuto(code).value
+        }
+    })
 }
 
 

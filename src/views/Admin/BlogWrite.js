@@ -4,10 +4,12 @@ import { connect } from 'react-redux'
 import { Button, Input, message } from 'antd'
 import { request } from '@/utils'
 import { requestURL } from '@/config'
+import Editor from '@/components/editor'
 class BlogWrite extends Component {
 
     state = {
-        content: '',
+        content2node: '',
+        content2show: '',
         title: '',
         tags: '',
         modules: {
@@ -42,6 +44,14 @@ class BlogWrite extends Component {
         })
     }
 
+    handleEditorChange ({ html, text }) {
+        console.log('handleEditorChange', html, text)
+        this.setState({
+            content2node: text,
+            content2show: text
+        })
+    }
+
     handelChange (v, e) {
         e.persist()
         this.setState({
@@ -58,7 +68,7 @@ class BlogWrite extends Component {
                 title: this.state.title,
                 author: email,
                 tags: this.state.tags,
-                content: this.state.content,
+                content: this.state.content2node,
                 status
             },
             method: 'post',
@@ -89,17 +99,23 @@ class BlogWrite extends Component {
                     <span>Tags: <Input value={this.state.tags} onChange={this.handelChange.bind(this, 'tags')} placeholder="多个tag用，分隔" /></span>
                 </div>
                 <div className="write-box-edit">
-                    <ReactQuill
+                    {/* <ReactQuill
                         value={this.state.content}
                         onChange={this.mdSwitch.bind(this)}
                         className="write-box-edit-quill"
                         modules={this.state.modules}
+                    /> */}
+                    <Editor
+                        value={this.state.content2show}
+                        onChange={this.handleEditorChange.bind(this)}
+                        className="write-box-edit-quill"
                     />
                 </div>
                 <div className="write-box-btn">
                     <Button onClick={this.submitClick.bind(this, 0)} type="primary">提交</Button>
                     <Button onClick={this.submitClick.bind(this, 1)}>保存</Button>
                 </div>
+
             </div>
         )
     }
