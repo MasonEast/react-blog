@@ -9,7 +9,7 @@ const Tags = (props) => {
     const [tagsAll, setTagsAll] = useState([])
     useEffect(() => {
         setTagsAll(props.app.blogs.filter(item => {
-            return item.tags && item.tags.includes(props.location.query)
+            return item.status === 0 && item.tags.includes(props.location.query)
         }))
     }, [props.app.blogs, props.location.query])
 

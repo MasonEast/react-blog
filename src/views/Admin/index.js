@@ -20,28 +20,22 @@ class Admin extends Component {
                     >
                         <Menu.Item key="blog">
                             <Link to="/admin/blogmanage">
-                                <Icon type="blog" />
+
                                 Blog Manage
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="mail">
                             <Link to="/admin/blogdraft">
-                                <Icon type="" />
+
                                 BLog Draft
                             </Link>
                         </Menu.Item>
                         <Menu.Item key="write">
                             <Link to="/admin/blogwrite">
-                                <Icon type="" />
+
                                 Blog Write
                             </Link>
                         </Menu.Item>
-                        {/* <Menu.Item key="todo">
-                            <Link to="/admin/todolist">
-                                <Icon type="" />
-                                Todo List
-                            </Link>
-                        </Menu.Item> */}
                     </Menu>
                 </div>
                 <div className="admin-right">

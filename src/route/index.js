@@ -8,8 +8,7 @@ import Tags from '@/views/Tags'
 import Admin from '@/views/Admin'
 import Blogmanage from '@/views/Admin/Blogmanage'
 import BlogWrite from '@/views/Admin/BlogWrite'
-import BlogDraft from '@/views/Admin/BlogDraft'
-import TodoList from '@/views/Admin/TodoList'
+// import BlogDraft from '@/views/Admin/BlogDraft'
 
 const routes = [
     {
@@ -35,12 +34,9 @@ const routes = [
                     },
                     {
                         path: "/admin/blogdraft",
-                        component: BlogDraft
+                        component: Blogmanage
                     },
-                    {
-                        path: "/admin/todolist",
-                        component: TodoList
-                    },
+
                 ]
             },
             {

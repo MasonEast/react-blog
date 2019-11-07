@@ -9,7 +9,7 @@ class Header extends Component {
         isActive: 'Home',
         visible: false
     }
-    changeActive = (e) => {
+    changeActive = (e) => {                    //一个简单判断是否给当前标签添加样式的逻辑
         e.persist()
         this.setState({
             isActive: e.target.innerHTML
@@ -21,29 +21,12 @@ class Header extends Component {
             visible: true
         })
     }
-
-    onLogin = () => {
-        this.setState({
-            visible: false
-        })
-    }
-    onRegister = () => {
-        this.setState({
-            visible: false
-        })
-    }
     onCancel = () => {
         this.setState({
             visible: false
         })
     }
-    logout = () => {
-
-    }
-    /**
-     * 滚动函数，判断当前滚动条是否需要头部吸顶
-     */
-    scrollMethod = () => {
+    scrollMethod = () => {                      //滚动函数，判断当前滚动条是否需要头部吸顶  
         let dom = document.querySelector('.header-box-tab-ul')
         // const sumH = document.body.scrollHeight || document.documentElement.scrollHeight
         // const viewH = document.documentElement.clientHeight
@@ -103,6 +86,6 @@ class Header extends Component {
 export default connect(
     ({ app }) => ({ app }),
     dispatch => ({
-        userLogout: payload => dispatch({ type: 'app/USERLOGOUT', payload })
+        userLogout: payload => dispatch({ type: 'app/USERLOGOUT', payload })       //退出登录，清除model里对应的user数据
     })
 )(Header);

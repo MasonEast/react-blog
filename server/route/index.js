@@ -1,17 +1,16 @@
 const Router = require('koa-router')
-const fs = require('fs')
-const path = require('path')
+// const fs = require('fs')
+// const path = require('path')
 const router = new Router()
 const blog = require('../models/blog')
 const user = require('../models/users')
+const tag = require('../models/tags')
 const responseOK = require('../middlewares/responseOk')
 
 /**
  * 获取blog列表
  */
 router.get('/blog', async (context, next) => {
-    console.log(context.request)
-    console.log(context.params)
     let queryId = context.request.query.id
     if (queryId) {
         const item = await blog.getBlog(queryId)
@@ -35,6 +34,10 @@ router.post('/blog', async (ctx, next) => {
     console.log('post', ctx.request.body)
     const { title, author, content, tags, status } = ctx.request.body
     await blog.add(title, author, content, tags, status)
+    if (!Number(status)) {
+        console.log('tags')
+        await tag.add(tags)
+    }
     await next()
 }, responseOK)
 
@@ -43,12 +46,26 @@ router.post('/blog', async (ctx, next) => {
  */
 router.delete('/blog/:id', async (context, next) => {
     console.log('delete', context.request.query)
-
-    await blog.deleteBlog(context.request.query.id)
+    const { id, tags } = context.request.query
+    await blog.deleteBlog(id)
+    await tag.deleteTag(tags)
     context.body = {
         status: 0
     }
 })
+
+/**
+ * 获取tags
+ */
+router.get('/tags', async (ctx, next) => {
+    const tags = await tag.getTags()
+    ctx.body = {
+        data: tags,
+        status: 0,
+        msg: '成功获取tags'
+    }
+})
+
 
 /**
  * 登录
@@ -122,7 +139,7 @@ router.post('/register', async (ctx) => {
         ctx.body = {
             status: 0,
             data,
-            msg: '保存成功'
+            msg: '注册成功'
         }
     }
 

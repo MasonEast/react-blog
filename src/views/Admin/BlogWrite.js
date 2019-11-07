@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import ReactQuill from 'react-quill';
 import { connect } from 'react-redux'
 import { Button, Input, message } from 'antd'
-import { submitData } from '@/utils'
-
+import { request } from '@/utils'
+import { requestURL } from '@/config'
 class BlogWrite extends Component {
 
     state = {
         content: '',
         title: '',
-        author: '',
         tags: '',
         modules: {
             toolbar: [
@@ -37,12 +36,7 @@ class BlogWrite extends Component {
 
 
     mdSwitch (value) {
-        console.log(111, value)
-        // var mdValue = document.getElementById("md-area").value || '';
-        // var mdValue = value
-        // var converter = new showdown.Converter();
-        // var html = converter.makeHtml(mdValue);
-        // document.getElementById("show-area").innerHTML = value;
+
         this.setState({
             content: value
         })
@@ -59,24 +53,40 @@ class BlogWrite extends Component {
         if (!email) {
             return message.error('登录后才能发布博客哟~')
         }
-        submitData({
+        request({
             data: {
                 title: this.state.title,
                 author: email,
                 tags: this.state.tags,
                 content: this.state.content,
                 status
-            }
-        }, '/blog')
+            },
+            method: 'post',
+            url: requestURL.blog
+        })
+    }
+
+    componentDidMount () {
+        if (!!(this.props.location.state)) {
+            let { record, content } = this.props.location.state
+
+            this.setState({
+                title: record.title,
+                tags: record.tags.join('，'),
+                content
+            })
+        }
     }
 
     render () {
+
+
         return (
             <div className="write-box">
                 <div className="write-box-input">
-                    <span>Title: <Input onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
+                    <span>Title: <Input value={this.state.title} onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
                     {/* <span>Author: <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" /></span> */}
-                    <span>Tags: <Input onChange={this.handelChange.bind(this, 'tags')} placeholder="tags" /></span>
+                    <span>Tags: <Input value={this.state.tags} onChange={this.handelChange.bind(this, 'tags')} placeholder="多个tag用，分隔" /></span>
                 </div>
                 <div className="write-box-edit">
                     <ReactQuill

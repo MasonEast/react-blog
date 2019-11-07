@@ -9,6 +9,35 @@ function alertMsg (value) {
 
 }
 
+export async function request (params = {}) {
+    const data = params.data || ''
+    const method = params.method || 'get'
+    const url = params.url || '/'
+    if (method === 'post') {
+        let formdata = new FormData()
+        Object.keys(data).forEach(item => formdata.append(item, data[item]))
+
+        let res = await axios({
+            method: 'post',
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            },
+            url,
+            data: formdata || ''
+        })
+
+        alertMsg(res.data)
+        return res.data
+    }
+    let res = await axios({
+        method,
+        url,
+        params: data
+    })
+    return res.data
+}
+
+
 export async function queryData (params, url) {
     let res = await axios({
         method: params.method || 'post',

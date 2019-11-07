@@ -45,7 +45,7 @@ module.exports = {
     },
 
     async getBlogs () {
-        let result = await Blog.find({})
+        let result = await Blog.find({}).sort({ _id: -1 })
         return result
     },
     async getBlog (id) {
@@ -53,7 +53,10 @@ module.exports = {
         return result
     },
     async deleteBlog (id) {
-        let result = await Blog.deleteOne({ _id: id })
+        let result = await Blog.deleteOne({ _id: id }, (err, data) => {
+            if (err) console.log(err)
+            console.log(data)
+        })
         return result
     },
 

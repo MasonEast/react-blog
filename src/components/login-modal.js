@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Form, Input, Button } from 'antd'
-import { login } from '@/utils'
-import config from '@/config'
+import { request } from '@/utils'
+import { requestURL } from '@/config'
 import { connect } from 'react-redux'
 import './index.less'
 class LoginModal extends Component {
@@ -18,21 +18,19 @@ class LoginModal extends Component {
             }
         });
         if (e.target.innerText === 'Login') {
-            login({ data: formData }, '/login').then(res => {
-                !res.data.status && this.loginSuccess(res.data.data.email)
+            request({ data: formData, url: requestURL.login, method: 'post' }).then(res => {
+                !res.status && this.loginSuccess(res.data.email)
             })
 
         } else {
-            login({ data: formData }, '/register').then(res => {
-                !res.data.status && this.loginSuccess(res.data.data.email)
+            request({ data: formData, url: requestURL.register, method: 'post' }).then(res => {
+                !res.status && this.loginSuccess(res.data.email)
             })
         }
     };
 
     loginSuccess (value) {
         this.props.onCancel()
-        config.isLogin = 1
-        config.email = value
         this.props.userLogin({
             isLogin: 1,
             email: value
@@ -51,14 +49,23 @@ class LoginModal extends Component {
                 className="login-modal"
             >
                 <Form onSubmit={this.handleSubmit} className="login-form">
-                    <Form.Item key="email" >
-                        {getFieldDecorator('email', {})(
-                            <Input placeholder="请输入您的邮箱~" />
-                        )}
+                    <Form.Item >
+                        {getFieldDecorator('email', {
+                            rules: [
+                                {
+                                    type: 'email',
+                                    message: 'The input is not valid E-mail!',
+                                },
+                                {
+                                    required: true,
+                                    message: 'Please input your E-mail!',
+                                },
+                            ],
+                        })(<Input placeholder="请输入您的邮箱~" />)}
                     </Form.Item>
                     <Form.Item key="password" >
                         {getFieldDecorator('password', {})(
-                            <Input placeholder="请输入您的密码~" />
+                            <Input type="password" placeholder="请输入您的密码~" />
                         )}
                     </Form.Item>
                     <Form.Item>
