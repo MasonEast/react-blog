@@ -59,6 +59,7 @@ class Header extends Component {
                 <div className="header-box-tab">
                     <ul className="header-box-tab-ul" onClick={this.changeActive}>
                         <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                        <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
                         <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
                         <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
                         {

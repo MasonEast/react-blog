@@ -19,6 +19,10 @@ const routes = [
                 component: Home,
             },
             {
+                path: "/tags",
+                component: Tags,
+            },
+            {
                 path: "/admin",
                 component: Admin,
                 redirect: "/admin/blogmanage",

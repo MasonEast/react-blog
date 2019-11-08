@@ -12,8 +12,17 @@ const responseOK = require('../middlewares/responseOk')
  */
 router.get('/blog', async (context, next) => {
     let queryId = context.request.query.id
+    let queryTag = context.request.query.tag
     if (queryId) {
-        const item = await blog.getBlog(queryId)
+        const item = await blog.getBlogById(queryId)
+        context.body = {
+            data: item,
+            status: 0
+        }
+        return
+    }
+    if (queryTag) {
+        const item = await blog.getBlogByTag(queryTag)
         context.body = {
             data: item,
             status: 0
