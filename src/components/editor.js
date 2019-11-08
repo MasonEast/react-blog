@@ -1,8 +1,6 @@
 import React from 'react'
 import MdEditor from 'react-markdown-editor-lite'
 import MarkdownIt from 'markdown-it'
-
-const MOCK_DATA = "Hello.\n\n * This is markdown.\n * It is fun\n * Love it or leave it."
 export default class Demo extends React.Component {
     mdParser = null
     constructor(props) {

@@ -39,7 +39,10 @@ class Header extends Component {
         }
     }
     componentDidMount () {
-        this.props.history.push("/home");
+        const { location, history } = this.props
+        if (location.pathname === '/') {
+            history.push("/home")
+        }
         window.addEventListener('scroll', this.scrollMethod)
     }
     /**

@@ -20,13 +20,18 @@
         box-sizing: border-box;
         padding-right: 4em;
         .me-section{
-            height: 200px;
+            height: 220px;
             position: relative;
             cursor: pointer;
             // background-color: #999;
             border-bottom: 1px solid #bbbaba;
+            transition: all .3s linear;
+            padding: 10px;
             &:hover{
-                color: rgb(233, 211, 14)
+                color: rgb(233, 211, 14);
+                background-color: #FFFFFF;
+                box-shadow:0px 0px 4px #333333;
+                border-radius: 10px;
             }
             .me-title{
                 color: #333;
@@ -40,7 +45,7 @@
             .me-detail{
                 color: #a3a3a3;
                 font-style: italic;
-                text-indent: 2em;
+                // text-indent: 2em;
                 height: 6em;
                 line-height: 2em;
                 text-overflow: ellipsis;
@@ -49,6 +54,9 @@
                 display: -webkit-box;
                 -webkit-line-clamp: 3;      //行数
                 -webkit-box-orient: vertical;
+                >h1,h2,h3,h4,h5,h6{
+                    color: #a3a3a3;
+                }
                 pre{
                     height: 6em;
                     overflow: hidden;
@@ -65,7 +73,8 @@
                 color: #666;
                 position: absolute;
                 bottom: 10px;
-                right: 20px;
+                left: 10px;
+                opacity: 0.4;
             }
         }
     }
