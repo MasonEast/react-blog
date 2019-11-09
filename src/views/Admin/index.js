@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import { Switch, Link } from 'dva/router';
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
 import './index.less'
+import { judgeWidth } from '@/utils'
 class Admin extends Component {
 
     render () {
@@ -12,7 +13,7 @@ class Admin extends Component {
                     <Menu
                         className="admin-left-menu"
                         onClick={this.handleClick}
-                        style={{ width: 256 }}
+                        style={judgeWidth() ? { width: 256 } : { width: 120 }}
                         defaultSelectedKeys={['blog']}
                         mode="vertical"
                     >

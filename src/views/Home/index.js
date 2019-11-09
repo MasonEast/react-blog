@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import './index.less'
 import { Tag } from 'antd'
 import { Link } from 'dva/router';
-import { dateChange, request, translateMarkdown } from '@/utils'
+import { dateChange, request, translateMarkdown, judgeWidth } from '@/utils'
 import { requestURL } from '@/config'
 class Home extends Component {
 
@@ -38,14 +38,14 @@ class Home extends Component {
                                         <content className="me-detail" dangerouslySetInnerHTML={{ __html: translateMarkdown(v.content) }}>
                                             {/* {v.content} */}
                                         </content>
-                                        <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>
+                                        {judgeWidth() && <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>}
                                     </section>
                                 </Link>
                             )
                         })
                     }
                 </div>
-                <div className="home-box-right">
+                {judgeWidth() && <div className="home-box-right">
                     <h4 style={{ marginBottom: 16 }}>MY TAGS:</h4>
                     <div>
                         {
@@ -72,8 +72,9 @@ class Home extends Component {
                         }
 
                     </div>
-                </div>
+                </div>}
             </div>
+
         );
     }
 }

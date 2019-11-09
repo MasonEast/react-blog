@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 // import ReactQuill from 'react-quill';
 import { connect } from 'react-redux'
 import { Button, Input, message } from 'antd'
-import { request } from '@/utils'
+import { request, judgeWidth } from '@/utils'
 import { requestURL } from '@/config'
 import Editor from '@/components/editor'
 class BlogWrite extends Component {
@@ -94,9 +94,9 @@ class BlogWrite extends Component {
         return (
             <div className="write-box">
                 <div className="write-box-input">
-                    <span>Title: <Input value={this.state.title} onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
+                    <span>Title: <Input size={judgeWidth() ? '' : "small"} value={this.state.title} onChange={this.handelChange.bind(this, 'title')} placeholder="title" /></span>
                     {/* <span>Author: <Input onChange={this.handelChange.bind(this, 'author')} placeholder="author" /></span> */}
-                    <span>Tags: <Input value={this.state.tags} onChange={this.handelChange.bind(this, 'tags')} placeholder="多个tag用，分隔" /></span>
+                    <span>Tags: <Input size={judgeWidth() ? '' : "small"} value={this.state.tags} onChange={this.handelChange.bind(this, 'tags')} placeholder="多个tag用，分隔" /></span>
                 </div>
                 <div className="write-box-edit">
                     {/* <ReactQuill                         //这是react-quill富文本编辑器，这里替换成了Mdeditor，方便使用marked和hljs

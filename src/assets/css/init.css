@@ -21,7 +21,31 @@ body{
   height: 100%;
   border: 0;
 }
+html{
+    font-size: 50px;
+}
 
+ /*
+             * 3、适配：
+             *   假设320px的设备   设置字体的大小是  50px
+             *   假设640px的设备   设置字体的大小是  100px
+             */
+
+ /*4、使用媒体查询*/
+ @media (min-width: 320px) and (max-width: 500px) {
+    html {
+        font-size: 50px;
+    }
+
+}
+/*5、需要适配移动端主流的设备     有很多    这里以iphone6   375px 为例*/ 
+/*但这个方法比较麻烦，要一个一个适配    用less可以解决这个问题*/
+
+@media (min-width: 640px) {
+    html {
+        font-size: 100px;    /*   640/320*50=100px    */
+    }
+}
 #root{
     width: 100%;
     height: 100%;

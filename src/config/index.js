@@ -4,3 +4,7 @@ export const requestURL = {
     register: '/api/register',
     tags: '/api/tags'
 }
+
+export const screeWidth = {
+    middleWidth: 640
+}

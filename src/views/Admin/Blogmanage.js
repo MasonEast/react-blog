@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table, Divider, Tag } from 'antd';
 import { connect } from 'react-redux'
 import { Link } from 'dva/router'
-import { request } from '@/utils'
+import { request, judgeWidth } from '@/utils'
 import { requestURL } from '@/config'
 class Blogmanage extends Component {
     constructor() {
@@ -90,6 +90,7 @@ class Blogmanage extends Component {
         return (
             <div>
                 <Table
+                    size={"small"}
                     columns={this.state.columns}
                     dataSource={data}
                     locale={{

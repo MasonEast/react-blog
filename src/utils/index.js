@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { message } from 'antd';
 import marked from 'marked'
+import { screeWidth } from '@/config'
 
 function alertMsg (value) {
     if (!value.status) {
@@ -64,5 +65,9 @@ export const translateMarkdown = (plainText, isGuardXss = false) => {
     })
 }
 
+
+export const judgeWidth = (value = screeWidth.middleWidth) => {
+    return document.body.clientWidth > value
+}
 
 

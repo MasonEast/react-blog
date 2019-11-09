@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'dva'
 import './index.less'
-import { translateMarkdown, dateChange, request } from '@/utils'
+import { translateMarkdown, dateChange, request, judgeWidth } from '@/utils'
 import { requestURL } from '@/config'
 import { Tag } from 'antd'
 import BlogAchor from '@/components/anchor'
@@ -42,9 +42,12 @@ class Blog extends Component {
                             <div className="blog-author">posted by {item.author} on {dateChange(item.date)}</div>
                             <p className="blog-content" dangerouslySetInnerHTML={{ __html: content }}></p>
                         </div>
-                        <div className="blog-box-anchor">
-                            <BlogAchor data={content} />
-                        </div>
+                        {
+                            judgeWidth() &&
+                            <div className="blog-box-anchor">
+                                <BlogAchor data={content} />
+                            </div>
+                        }
                     </div>
 
                 }
