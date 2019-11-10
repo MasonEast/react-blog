@@ -67,7 +67,20 @@ export const translateMarkdown = (plainText, isGuardXss = false) => {
 
 
 export const judgeWidth = (value = screeWidth.middleWidth) => {
+    // let width
+    // //加载页面时执行一次
+    // changeMargin();
+    // //监听浏览器宽度的改变
+    // window.onresize = function () {
+    //     changeMargin();
+    // };
+    // function changeMargin () {
+    //     return width = document.body.clientWidth
+    //     // return document.body.clientWidth > value
+    // }
+    // return width > value
     return document.body.clientWidth > value
 }
+
 
 

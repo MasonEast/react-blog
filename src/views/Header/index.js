@@ -6,6 +6,7 @@ import './index.less'
 import { judgeWidth } from '@/utils'
 import LoginModal from '@/components/login-modal'
 import { connect } from 'react-redux'
+import Footer from '../Footer'
 class Header extends Component {
     state = {
         isActive: 'Home',
@@ -63,59 +64,62 @@ class Header extends Component {
     render () {
         const { isLogin, email } = this.props.app.user
         return (
-            <div className="header-box">
-                <div className="header-box-tab">
-                    {
-                        judgeWidth()
-                            ?
-                            <ul className="header-box-tab-ul" onClick={this.changeActive}>
-                                <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
-                                <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
-                                <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
-                                <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
-                                {
-                                    isLogin
-                                        ?
-                                        <li className="header-box-tab-login" >欢迎, {email} <span onClick={this.props.userLogout}>退出</span></li>
-                                        :
-                                        <li className="header-box-tab-nologin" onClick={this.clickLogin}>登录/注册</li>
-                                }
-                            </ul>
-                            :
-                            <ul className="header-box-tab-ul" onClick={this.changeActive}>
-                                <li>
-                                    <Icon type="menu" onClick={this.showList} />
-                                    {/* <span >aaa</span> */}
-                                    {this.state.isShow && <ul onClick={this.showList} className="header-box-small-ul">
-                                        <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
-                                        <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
-                                        <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
-                                        <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
-                                    </ul>
+            <>
+                <div className="header-box">
+                    <div className="header-box-tab">
+                        {
+                            judgeWidth()
+                                ?
+                                <ul className="header-box-tab-ul" onClick={this.changeActive}>
+                                    <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                                    <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
+                                    <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
+                                    <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
+                                    {
+                                        isLogin
+                                            ?
+                                            <li className="header-box-tab-login" >欢迎, {email} <span onClick={this.props.userLogout}>退出</span></li>
+                                            :
+                                            <li className="header-box-tab-nologin" onClick={this.clickLogin}>登录/注册</li>
                                     }
-                                </li>
-                                {
-                                    isLogin
-                                        ?
-                                        <li className="header-box-tab-login" >欢迎, {email} <span onClick={this.props.userLogout}>退出</span></li>
-                                        :
-                                        <li className="header-box-tab-nologin" onClick={this.clickLogin}>登录/注册</li>
-                                }
-                            </ul>
-                    }
+                                </ul>
+                                :
+                                <ul className="header-box-tab-ul" onClick={this.changeActive}>
+                                    <li>
+                                        <Icon type="menu" onClick={this.showList} />
+                                        {/* <span >aaa</span> */}
+                                        {this.state.isShow && <ul onClick={this.showList} className="header-box-small-ul">
+                                            <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                                            <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
+                                            <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
+                                            <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
+                                        </ul>
+                                        }
+                                    </li>
+                                    {
+                                        isLogin
+                                            ?
+                                            <li className="header-box-tab-login" >欢迎, {email} <span onClick={this.props.userLogout}>退出</span></li>
+                                            :
+                                            <li className="header-box-tab-nologin" onClick={this.clickLogin}>登录/注册</li>
+                                    }
+                                </ul>
+                        }
+                    </div>
+                    <Switch>
+                        {this.props.routes.map((route, i) => (
+                            <RouteWithSubRoutes key={i} {...route} />
+                        ))}
+                    </Switch>
+                    <LoginModal
+                        visible={this.state.visible}
+                        onLogin={this.onLogin}
+                        onRegister={this.onRegister}
+                        onCancel={this.onCancel}
+                    />
                 </div>
-                <Switch>
-                    {this.props.routes.map((route, i) => (
-                        <RouteWithSubRoutes key={i} {...route} />
-                    ))}
-                </Switch>
-                <LoginModal
-                    visible={this.state.visible}
-                    onLogin={this.onLogin}
-                    onRegister={this.onRegister}
-                    onCancel={this.onCancel}
-                />
-            </div>
+                <Footer />
+            </>
         );
     }
 }
