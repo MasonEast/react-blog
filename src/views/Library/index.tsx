@@ -21,17 +21,17 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                     className="admin-left-menu"
                     onClick={handleClick}
                     style={judgeWidth() ? { width: 256 } : { width: 120 }}
-                    defaultSelectedKeys={['blog']}
+                    defaultSelectedKeys={['canvas']}
                     mode="vertical"
                 >
-                    <Menu.Item key="blog">
+                    <Menu.Item key="canvas">
                         <Link to="/library/canvas">
                             Canvas
                             </Link>
                     </Menu.Item>
-                    <Menu.Item key="mail">
-                        <Link to="/library/blogdraft">
-                            BLog Draft
+                    <Menu.Item key="paint">
+                        <Link to="/library/paint">
+                            Paint
                             </Link>
                     </Menu.Item>
                     <Menu.Item key="write">

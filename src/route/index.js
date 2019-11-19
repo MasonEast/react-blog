@@ -10,6 +10,7 @@ import Blogmanage from '@/views/Admin/Blogmanage'
 import BlogWrite from '@/views/Admin/BlogWrite'
 import Library from '@/views/Library'
 import Canvas from '@/views/Library/canvas'
+import Paint from '@/views/Library/Paint'
 
 
 const routes = [
@@ -66,8 +67,8 @@ const routes = [
                         component: Canvas
                     },
                     {
-                        path: "/library/blogwrite",
-                        component: BlogWrite
+                        path: "/library/paint",
+                        component: Paint
                     },
                     {
                         path: "/library/blogdraft",
