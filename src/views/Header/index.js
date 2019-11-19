@@ -7,6 +7,8 @@ import { judgeWidth } from '@/utils'
 import LoginModal from '@/components/login-modal'
 import { connect } from 'react-redux'
 import Footer from '../Footer'
+import classNames from 'classnames'
+
 class Header extends Component {
     state = {
         isActive: 'Home',
@@ -71,9 +73,10 @@ class Header extends Component {
                             judgeWidth()
                                 ?
                                 <ul className="header-box-tab-ul" onClick={this.changeActive}>
-                                    <li><Link to="/home" className={(this.state.isActive === 'Home') ? 'active' : ''}>Home</Link></li>
+                                    <li><Link to="/home" className={classNames({ 'active': this.state.isActive === 'Home' })}>Home</Link></li>
                                     <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
                                     <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
+                                    <li><Link to="/library" className={(this.state.isActive === 'Library') ? 'active' : ''}>Library</Link></li>
                                     <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
                                     {
                                         isLogin
@@ -118,7 +121,7 @@ class Header extends Component {
                         onCancel={this.onCancel}
                     />
                 </div>
-                <Footer />
+                {/* <Footer /> */}
             </>
         );
     }

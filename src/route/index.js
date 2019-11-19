@@ -8,6 +8,9 @@ import Tags from '@/views/Tags'
 import Admin from '@/views/Admin'
 import Blogmanage from '@/views/Admin/Blogmanage'
 import BlogWrite from '@/views/Admin/BlogWrite'
+import Library from '@/views/Library'
+import Canvas from '@/views/Library/canvas'
+
 
 const routes = [
     {
@@ -53,6 +56,25 @@ const routes = [
             {
                 path: "/tags/:id",
                 component: Tags
+            },
+            {
+                path: "/library",
+                component: Library,
+                routes: [
+                    {
+                        path: "/library/canvas",
+                        component: Canvas
+                    },
+                    {
+                        path: "/library/blogwrite",
+                        component: BlogWrite
+                    },
+                    {
+                        path: "/library/blogdraft",
+                        component: Blogmanage
+                    },
+
+                ]
             }
         ]
     },

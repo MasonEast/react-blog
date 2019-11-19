@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@babel/core": "7.6.0",
+    "@emotion/core": "^10.0.22",
+    "@emotion/styled": "^10.0.23",
     "@svgr/webpack": "4.3.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
@@ -12,15 +14,18 @@
     "babel-eslint": "10.0.3",
     "babel-jest": "^24.9.0",
     "babel-loader": "8.0.6",
+    "babel-plugin-emotion": "^10.0.23",
     "babel-plugin-named-asset-import": "^0.3.4",
     "babel-preset-react-app": "^9.0.2",
     "camelcase": "^5.2.0",
     "case-sensitive-paths-webpack-plugin": "2.2.0",
+    "classnames": "^2.2.6",
     "css-loader": "2.1.1",
     "dotenv": "6.2.0",
     "dotenv-expand": "5.1.0",
     "dva": "^2.4.1",
     "editor.md": "^1.5.0",
+    "emotion-theming": "^10.0.19",
     "eslint": "^6.1.0",
     "eslint-config-react-app": "^5.0.2",
     "eslint-loader": "3.0.2",
@@ -154,7 +159,8 @@
         {
           "libraryName": "antd",
           "style": "css"
-        }
+        },
+        "emotion"
       ]
     ]
   },
