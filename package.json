@@ -7,6 +7,8 @@
     "@emotion/core": "^10.0.22",
     "@emotion/styled": "^10.0.23",
     "@svgr/webpack": "4.3.2",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "^16.9.4",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
     "@typescript-eslint/parser": "^2.2.0",
     "antd": "^3.24.3",
@@ -168,6 +170,8 @@
     ]
   },
   "devDependencies": {
+    "@types/classnames": "^2.2.9",
+    "@types/react-color": "^3.0.1",
     "babel-plugin-import": "^1.12.2",
     "customize-cra": "^0.8.0",
     "http-proxy-middleware": "^0.20.0",

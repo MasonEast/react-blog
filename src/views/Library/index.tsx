@@ -34,11 +34,11 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                             Paint
                             </Link>
                     </Menu.Item>
-                    <Menu.Item key="write">
+                    {/* <Menu.Item key="write">
                         <Link to="/library/blogwrite">
                             Blog Write
                             </Link>
-                    </Menu.Item>
+                    </Menu.Item> */}
                 </Menu>
             </div>
             <div className="admin-right">

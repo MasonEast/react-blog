@@ -1,7 +1,6 @@
 import React from 'react'
 import './index.less'
 import classNames from 'classnames'
-// import vColorPicker from 'vcolorpicker'
 import { GithubPicker } from 'react-color'
 import '@/assets/icon/iconfont.css'
 
@@ -48,17 +47,11 @@ const Paint = () => {
     const mouseEvent = (e) => {
         let ctx = canvas2D.getContext('2d')
 
-        console.log(isDraw)
         e.persist()
         if (e.type === 'mousedown') {
             switch (active) {
                 case 'spray':
                     return canvas2D.style.backgroundColor = color
-                // case 'recall':
-                //     console.log(canvasUrl[-2])
-                //     ctx.drawImage(canvasUrl[-2], 500, 500)
-                //     setCanvasUrl(canvasUrl.length - 1)
-                //     return canvasUrl.length - 1
                 default:
                     isDraw = true
                     arr = []
@@ -67,7 +60,6 @@ const Paint = () => {
 
         }
         if (e.type === 'mousemove' && isDraw) {
-            // let ctx = canvas2D.getContext('2d')
             arr.push([e.pageX - canvas2D.offsetLeft, e.pageY - document.querySelector('.admin-box').offsetTop - 40])
 
             switch (active) {
@@ -103,42 +95,19 @@ const Paint = () => {
                     ctx.strokeStyle = "red";
                     ctx.clearRect(left, top, prewidth, preheight)
                     ctx.strokeRect(left, top, width, height);
-                    // ctx.stroke()
-                    // ctx.strokeStyle = canvas2D.style.backgroundColor || '#ccc'
-                    // ctx.lineJoin = "round";
-                    // ctx.lineWidth = 50;
-                    // ctx.beginPath();
-                    // arr.length > 1 && ctx.moveTo(arr[arr.length - 2][0], arr[arr.length - 2][1]);
-                    // ctx.lineTo(arr[arr.length - 1][0], arr[arr.length - 1][1]);
-                    // ctx.closePath();
-                    // ctx.stroke();  //描边
                     return
                 default:
                     return
             }
-            // ctx.strokeStyle = active === 'pen' ? color : (canvas2D.style.backgroundColor || '#ccc');
-            // ctx.fillStyle = color;
-            // ctx.lineJoin = "round";
-            // ctx.lineWidth = 5;
-            // ctx.beginPath();
-            // arr.length > 1 && ctx.moveTo(arr[arr.length - 2][0], arr[arr.length - 2][1]);
-            // ctx.lineTo(arr[arr.length - 1][0], arr[arr.length - 1][1]);
-            // ctx.closePath();
-            // ctx.fill();  //填充
-            // ctx.stroke();  //描边
-
 
         }
         if (e.type === 'mouseup') {
             setCanvasUrl(url => {
                 url.push(canvas2D.toDataURL())
-                console.log(url)
-
                 return url
             })
             isDraw = false
         }
-        // console.log(e)
     }
 
     React.useEffect(() => {
@@ -151,16 +120,9 @@ const Paint = () => {
             <div>
                 <GithubPicker width="500px" color={color} onChange={(value) => setColor(value.hex)} />
             </div>
-            <canvas
-                id="canvas"
-                onMouseDown={mouseEvent}
-                onMouseMove={(e) => mouseEvent(e)}
-                onMouseUp={mouseEvent}
-            ></canvas>
             <div className="paint-right">
                 <ul onClick={e => {
                     e.persist()
-                    console.log(e)
                     setActive(e.target.innerHTML)
                 }}>
                     <li className={classNames({ 'active': active === 'pen' })}><i className="iconfont icon-bianjixiugaiqianbishuxie">pen</i></li>
@@ -171,6 +133,13 @@ const Paint = () => {
                     <li onClick={downloadImg} className={classNames({ 'active': active === 'download' })}><i className="iconfont icon-baocun1">download</i></li>
                 </ul>
             </div>
+            <canvas
+                id="canvas"
+                onMouseDown={mouseEvent}
+                onMouseMove={(e) => mouseEvent(e)}
+                onMouseUp={mouseEvent}
+            ></canvas>
+            
         </div>
     )
 }
@@ -182,7 +151,6 @@ function paintFunc (id) {
     let height = window.innerHeight - 300;
     ctx.canvas.width = width;
     ctx.canvas.height = height;
-    console.log(ctx, canvas)
 }
 
 export default Paint

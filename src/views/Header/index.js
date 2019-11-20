@@ -76,7 +76,7 @@ class Header extends Component {
                                     <li><Link to="/home" className={classNames({ 'active': this.state.isActive === 'Home' })}>Home</Link></li>
                                     <li><Link to="/tags" className={(this.state.isActive === 'Tags') ? 'active' : ''}>Tags</Link></li>
                                     <li><Link to="/admin/blogmanage" className={(this.state.isActive === 'Admin') ? 'active' : ''}>Admin</Link></li>
-                                    <li><Link to="/library" className={(this.state.isActive === 'Library') ? 'active' : ''}>Library</Link></li>
+                                    <li><Link to="/library/canvas" className={(this.state.isActive === 'Library') ? 'active' : ''}>Library</Link></li>
                                     <li><Link to="/about" className={(this.state.isActive === 'About') ? 'active' : ''}>About</Link></li>
                                     {
                                         isLogin

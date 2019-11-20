@@ -380,8 +380,8 @@ function initCanvas (root) {
         var height = window.innerHeight;
         var x = e.clientX / width,
             y = e.clientY / height;
-        if (circles.length > 50) {
-            alert("圆圈太多了");
+        if (circles.length > 100) {
+            circles.length = 10
             return;
         }
 

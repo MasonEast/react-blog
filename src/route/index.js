@@ -9,7 +9,7 @@ import Admin from '@/views/Admin'
 import Blogmanage from '@/views/Admin/Blogmanage'
 import BlogWrite from '@/views/Admin/BlogWrite'
 import Library from '@/views/Library'
-import Canvas from '@/views/Library/canvas'
+import Canvas from '@/views/Library/Canvas'
 import Paint from '@/views/Library/Paint'
 
 

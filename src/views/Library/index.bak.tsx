@@ -2,7 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import styled from './styled'
 import Loading from './loading'
-import initCanvas from './canvas'
+import initCanvas from './Canvas'
 
 async function fetchApi() {
     const res = await axios('https://game.gtimg.cn/images/lol/act/img/js/heroList/hero_list.js')
