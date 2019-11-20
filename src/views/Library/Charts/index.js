@@ -1,44 +1,71 @@
 import React from 'react';
 import './index.less'
-import Line from '@/components/chartsTemplete/line'
+import Chart from '@/components/chartsTemplete'
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import arrayMove from 'array-move';
 
 const Charts = () => {
 
-    const [chartsArr, setChartsArr] = React.useState([])
-    // const [count, setCount] = React.useState(0)
+    // const [chartsArr, setChartsArr] = React.useState([])
 
-    const [arr, dispath] = React.useReducer((state, action) => {
+    const [chartsArr, dispatch] = React.useReducer((state, action) => {
         switch (action.type) {
-            case 'add':
-                console.log(state)
-                state.push(action.data)
-                return state
+            case 'Line':
+                console.log(action)
+                const { id, left, top } = action
+                return [...state, { id, left, top }]
             default:
                 return state
         }
-    }, [1]);
-    // return (
-    //     <div>
-    //         <h1 className="title">{count}</h1>
-    //         <button className="btn is-primary"
-    //             onClick={() => dispath('add')}
-    //         >Increment</button>
-    //     </div>
-    // )
-
+    }, []);
 
     const createChart = (e) => {
         e.persist()
         switch (e.target.innerHTML) {
             case "折线图":
-                setChartsArr([...chartsArr, `Line${chartsArr.length}`])
+                dispatch({ type: 'Line', id: `Line${chartsArr.length}`, left: 20, top: 20 })
                 break
-            // return 
+            case "柱状图":
+                dispatch({ type: 'Bar', left: 20, top: 20 })
+                break
+            case "饼图":
+                dispatch({ type: 'Pie', left: 20, top: 20 })
+                break
             default:
                 return
         }
     }
-    console.log(chartsArr)
+    const SortableItem = SortableElement(({ v }) =>
+        <Chart
+            type={v.id.replace(/[0-9]/g, '')}
+            // key={v.id}
+            left={v.left}
+            top={v.top}
+        />);
+
+    const SortableList = SortableContainer((chartsArr) => {
+        console.log(chartsArr)
+        return (
+            <ul>
+                {chartsArr.items.map((value, index) => (
+                    <SortableItem key={`item-${value.id}`} index={index} v={value} />
+                ))}
+            </ul>
+        );
+    });
+
+    const onSortEnd = ({ oldIndex, newIndex, collection, isKeySorting }, e) => {
+        console.log(oldIndex, newIndex, collection, isKeySorting, e)
+        // this.setState(({ items }) => ({
+        //     items: arrayMove(items, oldIndex, newIndex),
+        // }));
+    };
+
+
+    // const moveBox = (id, left, top) => {
+    //     dispatch({ type: id.replace(/[0-9]/g, ''), id, left, top })
+    // }
+
 
     return (
         <div className="charts-box">
@@ -51,19 +78,13 @@ const Charts = () => {
                 </ul>
             </div>
             <div className="charts-right">
-                {
-                    chartsArr.map(v => {
-                        switch (v.replace(/[0-9]/g, '')) {
-                            case 'Line':
-                                return <Line key={v} />
-                            default:
-                                return false
-                        }
-                    })
-                }
+                <SortableList items={chartsArr} onSortEnd={onSortEnd} />
             </div>
         </div>
     )
 }
 
 export default Charts
+
+
+

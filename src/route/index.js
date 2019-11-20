@@ -12,6 +12,7 @@ import Library from '@/views/Library'
 import Canvas from '@/views/Library/Canvas'
 import Paint from '@/views/Library/Paint'
 import Charts from '@/views/Library/Charts'
+import NotFOUND from '@/views/404'
 
 const routes = [
     {
@@ -76,7 +77,11 @@ const routes = [
                     },
 
                 ]
-            }
+            },
+            {
+                path: "*",
+                component: NotFOUND
+            },
         ]
     },
 
