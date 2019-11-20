@@ -12,7 +12,6 @@ interface Iprops {
 
 const Library: React.FC<Iprops> = (props: Iprops) => {
     const handleClick = (e: object) => {
-        console.log(e)
     }
     return (
         <div className="admin-box">
@@ -34,11 +33,11 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                             Paint
                             </Link>
                     </Menu.Item>
-                    {/* <Menu.Item key="write">
-                        <Link to="/library/blogwrite">
-                            Blog Write
+                    <Menu.Item key="charts">
+                        <Link to="/library/charts">
+                            Charts
                             </Link>
-                    </Menu.Item> */}
+                    </Menu.Item>
                 </Menu>
             </div>
             <div className="admin-right">

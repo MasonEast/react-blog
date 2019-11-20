@@ -8,7 +8,6 @@ export default class Demo extends React.Component {
         this.mdParser = new MarkdownIt(/* Markdown-it options */)
     }
     handleEditorChange ({ html, text }) {
-        console.log('handleEditorChange', html, text)
     }
     render () {
         const { onChange, value } = this.props

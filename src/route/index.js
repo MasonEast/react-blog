@@ -11,7 +11,7 @@ import BlogWrite from '@/views/Admin/BlogWrite'
 import Library from '@/views/Library'
 import Canvas from '@/views/Library/Canvas'
 import Paint from '@/views/Library/Paint'
-
+import Charts from '@/views/Library/Charts'
 
 const routes = [
     {
@@ -71,8 +71,8 @@ const routes = [
                         component: Paint
                     },
                     {
-                        path: "/library/blogdraft",
-                        component: Blogmanage
+                        path: "/library/charts",
+                        component: Charts
                     },
 
                 ]

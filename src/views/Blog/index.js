@@ -13,7 +13,6 @@ class Blog extends Component {
     }
     componentDidMount () {
         request({ data: { id: this.props.match.params.id }, url: requestURL.blog }).then(res => {
-            console.log(res)
             this.setState({
                 data: res.data
             })

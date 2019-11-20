@@ -19,7 +19,6 @@ const Tags = (props) => {
         // })
         props.history.push(`/tags/${e.target.innerHTML}`)
     }
-    console.log(props)
     useEffect(() => {
 
         request({ data: { tag: props.location.pathname.replace(/\/tags\/?/, '') }, url: requestURL.blog }).then(res => {

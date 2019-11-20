@@ -45,7 +45,6 @@ class BlogWrite extends Component {
     }
 
     handleEditorChange ({ html, text }) {
-        console.log('handleEditorChange', html, text)
         this.setState({
             content2node: text,
             content2show: text

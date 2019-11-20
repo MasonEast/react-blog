@@ -29,7 +29,6 @@ const BlogAnchor = (props) => {
     anchorList.forEach((item, i) => {
         deepSearch(item, anchorArr)
     })
-    console.log(anchorArr)
 
     return (
         <Anchor

@@ -18,7 +18,6 @@ type dataArr = data[]
 const Library = () => {
     const [data, setData] = React.useState<dataArr>([])
     const [value, setValue] = React.useState(function () {
-        console.log(1111)
         return 2
     })
 
