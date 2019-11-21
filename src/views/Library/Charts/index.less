@@ -1,17 +1,28 @@
 .charts-box{
     width: 100%;
     height: calc(100vh - 1rem);
-    background-color: #999;
+    background-color: #151527;
     justify-content: center;
     display: flex;
     .charts-left{
+        position: relative;
         width: 15%;
         min-width: 1rem;
+        .charts-left-button{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+        }
     }
-    .charts-right{
-        width: 85%;
+    .charts-middle{
+        width: 65%;
         height: 100%;
-        background-color: red;
+        // background-color: red;
         position: relative;
+    }
+    .charts-right {
+        width: 20%;
+        height: 100%;
+        background-color: #001529;
     }
 }

@@ -1,0 +1,36 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+<body>
+    <div style="margin:0 auto;height:600px;width:700px;">
+        <button id="btn">js控制页面的全屏展示和退出全屏显示</button>
+        <div id="content" style="margin:0 auto;height:500px;width:700px; background:#ccc;">
+            <h1>js控制页面的全屏展示和退出全屏显示</h1>
+        </div>
+    </div>
+</body>
+<style type="text/css">
+    #content:-webkit-full-screen {
+        background-color: rgb(255, 255, 12);
+    }
+</style>
+<script language="JavaScript">
+    document.getElementById("btn").οnclick = function () {
+        var elem = document.getElementById("content");
+        console.log(elem);
+        requestFullScreen(elem);
+    };
+    function requestFullScreen(element) {
+        var requestMethod = element.requestFullScreen || element.webkitRequestFullScreen || element.mozRequestFullScreen || element.msRequestFullScreen;
+        if (requestMethod) {
+            requestMethod.call(element);
+        } else if (typeof window.ActiveXObject !== "undefined") {
+            var wscript = new ActiveXObject("WScript.Shell");
+            if (wscript !== null) {
+                wscript.SendKeys("{F11}");
+            }
+        }
+    } 
+</script>
+
+</html>

@@ -21,40 +21,50 @@ import pieBasicOption from './pieBasic'
 
 const style = {
     position: 'absolute',
-    border: '1px dashed gray',
-    backgroundColor: 'white',
-    padding: '0.5rem 1rem',
+    // border: '1px dashed gray',
+    // backgroundColor: 'white',
+    // padding: '0.5rem 1rem',
     cursor: 'move',
 }
 
 const Chart = (props) => {
     const { type, id, left, top, } = props
 
-    console.log(left, top)
+    const [{ isDragging }, drag] = useDrag({
+        item: { id, left, top, type: 'box' },
+        collect: monitor => ({
+            isDragging: monitor.isDragging(),
+        }),
+    })
+
+    console.log(left, top, type)
 
     let option = {}
     switch (type) {
-        case 'Line':
+        case 'lineBasic':
             option = lineBasicOption
             break
-        case 'Bar':
+        case 'barBasic':
             option = barBasicOption
             break
-        case 'Pie':
+        case 'pieBasic':
             option = pieBasicOption
             break
         default:
             option = lineBasicOption
             break
     }
+    console.log(option)
     return (
-        <div style={{ ...style, left, top }}>
-            <ReactEcharts option={option} theme="Imooc" style={{ width: '300px', height: '300px' }} />
+        <div ref={drag} style={{ ...style, left, top }}>
+            <ReactEcharts option={option} theme="Imooc" style={{ width: '300px', height: '250px' }} />
         </div>
     )
 }
 
 export default Chart
+
+
 
 
 
