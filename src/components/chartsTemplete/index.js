@@ -14,7 +14,9 @@ import 'echarts/lib/component/title';
 import 'echarts/lib/component/legend';
 import 'echarts/lib/component/markPoint';
 import ReactEcharts from 'echarts-for-react';
+import ClassNames from 'classnames'
 
+import './index.less'
 import barBasicOption from './barBasic'
 import lineBasicOption from './lineBasic'
 import pieBasicOption from './pieBasic'
@@ -28,7 +30,10 @@ const style = {
 }
 
 const Chart = (props) => {
-    const { type, id, left, top, } = props
+
+    const chartRef = React.useRef()
+
+    const { type, id, left, top, deleteChart, selectChart, active, wd } = props
 
     const [{ isDragging }, drag] = useDrag({
         item: { id, left, top, type: 'box' },
@@ -36,8 +41,6 @@ const Chart = (props) => {
             isDragging: monitor.isDragging(),
         }),
     })
-
-    console.log(left, top, type)
 
     let option = {}
     switch (type) {
@@ -54,10 +57,27 @@ const Chart = (props) => {
             option = lineBasicOption
             break
     }
-    console.log(option)
+    // let echarts_react
+    // if (echarts_react) {
+    //     let echarts_instance = echarts_react.getEchartsInstance();
+
+    //     console.log(echarts_instance)
+    // }
+    console.log(props)
     return (
-        <div ref={drag} style={{ ...style, left, top }}>
-            <ReactEcharts option={option} theme="Imooc" style={{ width: '300px', height: '250px' }} />
+        <div
+            className={ClassNames({ 'active': active })}
+            onDoubleClick={(e) => deleteChart(id)}
+            onClick={() => selectChart(id)}
+            ref={drag}
+            style={{ ...style, left, top }}
+        >
+            <ReactEcharts
+                option={option}
+                theme="Imooc"
+                style={{ width: `${wd}px`, height: '250px' }}
+                ref={chartRef}
+            />
         </div>
     )
 }

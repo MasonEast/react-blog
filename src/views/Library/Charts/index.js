@@ -9,6 +9,7 @@ import HTML5Backend from 'react-dnd-html5-backend'
 import { Button, Icon } from 'antd'
 import Menu from '@/components/menu'
 import Tabs from '@/components/tab'
+
 const Charts = () => {
 
     const chartsType = {
@@ -16,29 +17,34 @@ const Charts = () => {
         Bar: ['barBasic'],
         Pie: ['pieBasic']
     }
-    const [fullFlag, setFullFlag] = React.useState(false)
-    const [chartsObj, dispatch] = React.useReducer((state, action) => {
-        // console.log('rd')
-        const { id, left, top, type } = action
-        return { ...state, [id]: { id, type, left, top } }
-        // console.log(state, id)
-        // switch (action.type) {
-        //     case 'Line':
-        //         {
 
-        //             return { ...state, [id]: { id, type, left, top } }
-        //         }
-        //     case 'Bar':
-        //         return { ...state, [id]: { id, type, left, top } }
-        //     default:
-        //         return state
-        // }
+    const [fullFlag, setFullFlag] = React.useState(false)
+    const [select, setSelect] = React.useState({})
+
+    const [chartsObj, dispatch] = React.useReducer((state, action) => {
+        const { id, left, top, active, type, wd } = action
+        if (type === "delete") {
+            delete state[id]
+            return { ...state }
+        }
+        if (type === 'activeClass') {
+            Object.keys(state).map(item => {
+                if (item === id) {
+                    state[item].active = true
+                    return item
+                }
+                state[item].active = false
+                return item
+            })
+            return { ...state }
+        }
+        return { ...state, [id]: { id, type, active, left, top, wd } }
     }, {});
 
     const createChart = (item) => {
         switch (item.key) {
             case "lineBasic":
-                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, left: 20, top: 20 })
+                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, wd: 300 })
                 break
             case "barBasic":
                 dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, left: 20, top: 20 })
@@ -78,7 +84,7 @@ const Charts = () => {
         }
         setFullFlag(true)
     }
-    function exitFullscreen () {
+    const exitFullscreen = () => {
         if (document.exitFullScreen) {
             document.exitFullScreen();
         } else if (document.mozCancelFullScreen) {
@@ -88,8 +94,23 @@ const Charts = () => {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
-        setFullFlag(true)
+        setFullFlag(false)
     }
+
+    const deleteChart = (id) => {
+
+        dispatch({ type: 'delete', id })
+    }
+
+    const selectChart = (id) => {
+        setSelect(chartsObj[id])
+        dispatch({ type: "activeClass", id })
+    }
+
+    const changeView = (v) => {
+        console.log(v)
+    }
+
     return (
         <div className="charts-box">
             <DndProvider backend={HTML5Backend}>
@@ -105,7 +126,7 @@ const Charts = () => {
                 </div>
                 <div ref={drop} className="charts-middle">
                     {Object.keys(chartsObj).map(v => {
-                        const { left, top, id, type } = chartsObj[v]
+                        const { left, top, id, type, active, wd } = chartsObj[v]
                         return (
                             <Chart
                                 type={type}
@@ -113,6 +134,10 @@ const Charts = () => {
                                 id={id}
                                 left={left}
                                 top={top}
+                                wd={wd}
+                                active={active}
+                                deleteChart={deleteChart}
+                                selectChart={selectChart}
                             >
 
                             </Chart>
@@ -120,7 +145,10 @@ const Charts = () => {
                     })}
                 </div>
                 <div className="charts-right">
-                    <Tabs />
+                    <Tabs
+                        changeView={changeView}
+                        select={select}
+                    />
                 </div>
             </DndProvider>
         </div>
