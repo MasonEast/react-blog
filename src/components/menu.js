@@ -40,7 +40,7 @@ export default class Sider extends React.Component {
                                 key={v}
                                 title={
                                     <span>
-                                        <Icon type="mail" />
+                                        <Icon type={`${v.toLowerCase()}-chart`} />
                                         <span>{v}</span>
                                     </span>
                                 }

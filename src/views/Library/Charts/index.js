@@ -88,6 +88,7 @@ const Charts = () => {
         } else if (document.msExitFullscreen) {
             document.msExitFullscreen();
         }
+        setFullFlag(true)
     }
     return (
         <div className="charts-box">
