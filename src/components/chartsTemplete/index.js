@@ -33,7 +33,7 @@ const Chart = (props) => {
 
     const chartRef = React.useRef()
 
-    const { type, id, left, top, deleteChart, selectChart, active, wd } = props
+    const { type, id, left, top, deleteChart, selectChart, active, width, height } = props
 
     const [{ isDragging }, drag] = useDrag({
         item: { id, left, top, type: 'box' },
@@ -63,7 +63,6 @@ const Chart = (props) => {
 
     //     console.log(echarts_instance)
     // }
-    console.log(props)
     return (
         <div
             className={ClassNames({ 'active': active })}
@@ -75,7 +74,7 @@ const Chart = (props) => {
             <ReactEcharts
                 option={option}
                 theme="Imooc"
-                style={{ width: `${wd}px`, height: '250px' }}
+                style={{ width: `${width}px`, height: `${height}px` }}
                 ref={chartRef}
             />
         </div>

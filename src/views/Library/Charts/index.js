@@ -22,7 +22,10 @@ const Charts = () => {
     const [select, setSelect] = React.useState({})
 
     const [chartsObj, dispatch] = React.useReducer((state, action) => {
-        const { id, left, top, active, type, wd } = action
+        const { id, left, top, active, type, width, height, view, value } = action
+        if (type === 'move') {
+            return { ...state, [id]: { ...state[id], left, top } }
+        }
         if (type === "delete") {
             delete state[id]
             return { ...state }
@@ -38,19 +41,22 @@ const Charts = () => {
             })
             return { ...state }
         }
-        return { ...state, [id]: { id, type, active, left, top, wd } }
+        if (type === 'changeview') {
+            return { ...state, [id]: { ...state[id], [view]: value } }
+        }
+        return { ...state, [id]: { id, type, active, left, top, width, height } }
     }, {});
 
     const createChart = (item) => {
         switch (item.key) {
             case "lineBasic":
-                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, wd: 300 })
+                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250 })
                 break
             case "barBasic":
-                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, left: 20, top: 20 })
+                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, left: 20, top: 20, width: 300, height: 250 })
                 break
             case "pieBasic":
-                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, left: 20, top: 20 })
+                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, left: 20, top: 20, width: 300, height: 250 })
                 break
             default:
                 return
@@ -68,7 +74,7 @@ const Charts = () => {
         },
     })
     const moveBox = (id, left, top) => {
-        dispatch({ type: id.replace(/[0-9]/g, ''), id, left, top })
+        dispatch({ type: 'move', id, left, top })
 
     }
     const fullscreen = () => {
@@ -107,8 +113,9 @@ const Charts = () => {
         dispatch({ type: "activeClass", id })
     }
 
-    const changeView = (v) => {
-        console.log(v)
+    const changeView = (value, id, type, view) => {
+        setSelect(pre => ({ ...pre, [view]: value }))
+        dispatch({ type, value, id, view })
     }
 
     return (
@@ -126,7 +133,7 @@ const Charts = () => {
                 </div>
                 <div ref={drop} className="charts-middle">
                     {Object.keys(chartsObj).map(v => {
-                        const { left, top, id, type, active, wd } = chartsObj[v]
+                        const { left, top, id, type, active, width, height } = chartsObj[v]
                         return (
                             <Chart
                                 type={type}
@@ -134,7 +141,8 @@ const Charts = () => {
                                 id={id}
                                 left={left}
                                 top={top}
-                                wd={wd}
+                                width={width}
+                                height={height}
                                 active={active}
                                 deleteChart={deleteChart}
                                 selectChart={selectChart}
