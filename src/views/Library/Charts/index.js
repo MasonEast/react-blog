@@ -7,77 +7,83 @@ import Chart from '@/components/chartsTemplete'
 import { DndProvider, useDrop } from 'react-dnd'
 import HTML5Backend from 'react-dnd-html5-backend'
 import { Button, Icon } from 'antd'
-import Menu from '@/components/menu'
-import Tabs from '@/components/tab'
+import Menu from '@/components/chartsTemplete/menu'
+import Tabs from '@/components/chartsTemplete/tab'
+import lineBasicOption from '@/components/chartsTemplete/lineBasic'
+import barBasicOption from '@/components/chartsTemplete/barBasic'
+import pieBasicOption from '@/components/chartsTemplete/pieBasic'
 
 const Charts = () => {
 
-    const chartsType = {
+    const chartsType = {                //主要用来展示左侧菜单栏的数据
         Line: ['lineBasic'],
         Bar: ['barBasic'],
         Pie: ['pieBasic']
     }
 
-    const [fullFlag, setFullFlag] = React.useState(false)
-    const [select, setSelect] = React.useState({})
+    const [fullFlag, setFullFlag] = React.useState(false)       //控制是否全屏的flag
+    const [select, setSelect] = React.useState({})              //获取并保存选中的图表信息
 
-    const [chartsObj, dispatch] = React.useReducer((state, action) => {
-        const { id, left, top, active, type, width, height, view, value } = action
-        if (type === 'move') {
-            return { ...state, [id]: { ...state[id], left, top } }
-        }
-        if (type === "delete") {
-            delete state[id]
-            return { ...state }
-        }
-        if (type === 'activeClass') {
-            Object.keys(state).map(item => {
-                if (item === id) {
-                    state[item].active = true
+    const [chartsObj, dispatch] = React.useReducer((state, action) => {         //数据控制中心
+        const { id, left, top, active, type, width, height, fatherView, view, value, option } = action
+
+        switch (type) {
+            case 'move':                                        //保存拖拽后的图表信息
+                return { ...state, [id]: { ...state[id], left, top } }
+            case 'delete':                                      //从数据中删除对应的图表信息
+                delete state[id]
+                return { ...state }
+            case 'activeClass':                                 //给选中的图表添加选中的样式
+                Object.keys(state).map(item => {
+                    if (item === id) {
+                        state[item].active = true
+                        return item
+                    }
+                    state[item].active = false
                     return item
-                }
-                state[item].active = false
-                return item
-            })
-            return { ...state }
+                })
+                return { ...state }
+            case 'changeview':                                  //改变图表的宽高， 位置， 保存对应的信息
+                return { ...state, [id]: { ...state[id], [view]: value } }
+            case 'changeOption':                                //改变图表的option样式等信息
+                return { ...state, [id]: { ...state[id], option: { ...state[id]['option'], [fatherView]: { ...state[id]['option'][fatherView], [view]: value } } } }
+            default:                                            //默认就是创建一个对应的图表，添加到state中
+                return { ...state, [id]: { id, type, active, left, top, width, height, option } }
         }
-        if (type === 'changeview') {
-            return { ...state, [id]: { ...state[id], [view]: value } }
-        }
-        return { ...state, [id]: { id, type, active, left, top, width, height } }
+
     }, {});
 
-    const createChart = (item) => {
+    const createChart = (item) => {                             //创建图表
         switch (item.key) {
             case "lineBasic":
-                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250 })
+                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: lineBasicOption })
                 break
             case "barBasic":
-                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, left: 20, top: 20, width: 300, height: 250 })
+                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: barBasicOption })
                 break
             case "pieBasic":
-                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, left: 20, top: 20, width: 300, height: 250 })
+                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieBasicOption })
                 break
             default:
                 return
         }
     }
 
-    const [, drop] = useDrop({
+    const [, drop] = useDrop({                                  //通过ref创建拖拽区域， 并定义拖拽方法
         accept: 'box',
         drop (item, monitor) {
             const delta = monitor.getDifferenceFromInitialOffset()
             const left = Math.round(item.left + delta.x)
             const top = Math.round(item.top + delta.y)
-            moveBox(item.id, left, top)
+            moveChart(item.id, left, top)
             return undefined
         },
     })
-    const moveBox = (id, left, top) => {
+    const moveChart = (id, left, top) => {                      //拖拽后改变state对应id的图表的位置
         dispatch({ type: 'move', id, left, top })
 
     }
-    const fullscreen = () => {
+    const fullscreen = () => {                                  //控制全屏
         let ele = document.querySelector('.charts-box')
         if (ele.requestFullscreen) {
             ele.requestFullscreen();
@@ -90,7 +96,7 @@ const Charts = () => {
         }
         setFullFlag(true)
     }
-    const exitFullscreen = () => {
+    const exitFullscreen = () => {                              //退出全屏
         if (document.exitFullScreen) {
             document.exitFullScreen();
         } else if (document.mozCancelFullScreen) {
@@ -103,19 +109,24 @@ const Charts = () => {
         setFullFlag(false)
     }
 
-    const deleteChart = (id) => {
+    const deleteChart = (id) => {                               //双击通知state删除对应id的图表
 
         dispatch({ type: 'delete', id })
     }
 
-    const selectChart = (id) => {
+    const selectChart = (id) => {                               //设置选中图表， 并添加被选中的样式
         setSelect(chartsObj[id])
         dispatch({ type: "activeClass", id })
     }
 
-    const changeView = (value, id, type, view) => {
-        setSelect(pre => ({ ...pre, [view]: value }))
-        dispatch({ type, value, id, view })
+    const changeView = (value, id, type, view, fatherView = '') => { //右侧菜单栏改变对应图表数据的样式
+        if (type === 'changeOption') {
+            setSelect(pre => ({ ...pre, option: { ...pre['option'], [fatherView]: { ...pre['option'][fatherView], [view]: value } } }))
+        } else {
+            setSelect(pre => ({ ...pre, [view]: value }))
+
+        }
+        dispatch({ type, value, id, fatherView, view })
     }
 
     return (
@@ -133,7 +144,7 @@ const Charts = () => {
                 </div>
                 <div ref={drop} className="charts-middle">
                     {Object.keys(chartsObj).map(v => {
-                        const { left, top, id, type, active, width, height } = chartsObj[v]
+                        const { left, top, id, type, active, width, height, option } = chartsObj[v]
                         return (
                             <Chart
                                 type={type}
@@ -146,6 +157,7 @@ const Charts = () => {
                                 active={active}
                                 deleteChart={deleteChart}
                                 selectChart={selectChart}
+                                option={option}
                             >
 
                             </Chart>

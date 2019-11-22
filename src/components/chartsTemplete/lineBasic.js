@@ -3,9 +3,10 @@
 var option = {
     title: {
         text: '基本折线图',
-        textStyle: {
-            color: '#999'
-        }
+        show: true,
+        // textStyle: {
+        //     color: '#999'
+        // }
     },
     // backgroundColor: '#FFF0F5',
 
@@ -17,14 +18,17 @@ var option = {
 
     legend: {
         color: '#fff',
-        // show: false,
+        show: true,
+        top: 10,
+        right: 10,
         // orient 设置布局方式，默认水平布局，可选值：'horizontal'（水平） ¦ 'vertical'（垂直）
         orient: 'horizontal',
         // x 设置水平安放位置，默认全图居中，可选值：'center' ¦ 'left' ¦ 'right' ¦ {number}（x坐标，单位px）
-        x: 'right',
+        // x: 'right',
         // y 设置垂直安放位置，默认全图顶端，可选值：'top' ¦ 'bottom' ¦ 'center' ¦ {number}（y坐标，单位px）
-        y: 'top',
-        data: ['预期', '实际', '假设']
+        // y: 'top',
+        // data: ['预期', '实际', '假设']
+
     },
 
     //  图表距边框的距离,可选值：'百分比'¦ {number}（单位px）

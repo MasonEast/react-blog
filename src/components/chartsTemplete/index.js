@@ -17,9 +17,9 @@ import ReactEcharts from 'echarts-for-react';
 import ClassNames from 'classnames'
 
 import './index.less'
-import barBasicOption from './barBasic'
-import lineBasicOption from './lineBasic'
-import pieBasicOption from './pieBasic'
+// import barBasicOption from './barBasic'
+// import lineBasicOption from './lineBasic'
+// import pieBasicOption from './pieBasic'
 
 const style = {
     position: 'absolute',
@@ -33,8 +33,8 @@ const Chart = (props) => {
 
     const chartRef = React.useRef()
 
-    const { type, id, left, top, deleteChart, selectChart, active, width, height } = props
-
+    const { type, id, left, top, deleteChart, selectChart, active, width, height, option } = props
+    console.log(option)
     const [{ isDragging }, drag] = useDrag({
         item: { id, left, top, type: 'box' },
         collect: monitor => ({
@@ -42,27 +42,11 @@ const Chart = (props) => {
         }),
     })
 
-    let option = {}
-    switch (type) {
-        case 'lineBasic':
-            option = lineBasicOption
-            break
-        case 'barBasic':
-            option = barBasicOption
-            break
-        case 'pieBasic':
-            option = pieBasicOption
-            break
-        default:
-            option = lineBasicOption
-            break
-    }
-    // let echarts_react
-    // if (echarts_react) {
-    //     let echarts_instance = echarts_react.getEchartsInstance();
-
-    //     console.log(echarts_instance)
-    // }
+    React.useEffect(() => {
+        console.log(option, 2)
+        chartRef.current.getEchartsInstance().setOption(option)
+    }, [option])
+    console.log(option, 3)
     return (
         <div
             className={ClassNames({ 'active': active })}
