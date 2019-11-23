@@ -46,7 +46,8 @@ const Charts = () => {
             case 'changeview':                                  //改变图表的宽高， 位置， 保存对应的信息
                 return { ...state, [id]: { ...state[id], [view]: value } }
             case 'changeOption':                                //改变图表的option样式等信息
-                return { ...state, [id]: { ...state[id], option: { ...state[id]['option'], [fatherView]: { ...state[id]['option'][fatherView], [view]: value } } } }
+                return { ...state, [id]: { ...state[id], 'option': value } }
+            // return { ...state, [id]: { ...state[id], option: { ...state[id]['option'], [fatherView]: { ...state[id]['option'][fatherView], [view]: value } } } }
             default:                                            //默认就是创建一个对应的图表，添加到state中
                 return { ...state, [id]: { id, type, active, left, top, width, height, option } }
         }
@@ -119,9 +120,10 @@ const Charts = () => {
         dispatch({ type: "activeClass", id })
     }
 
-    const changeView = (value, id, type, view, fatherView = '') => { //右侧菜单栏改变对应图表数据的样式
+    const changeView = (type, value, id, view, fatherView = '') => { //右侧菜单栏改变对应图表数据的样式
         if (type === 'changeOption') {
-            setSelect(pre => ({ ...pre, option: { ...pre['option'], [fatherView]: { ...pre['option'][fatherView], [view]: value } } }))
+            setSelect(pre => ({ ...pre, option: value }))
+            // setSelect(pre => ({ ...pre, option: { ...pre['option'], [fatherView]: { ...pre['option'][fatherView], [view]: value } } }))
         } else {
             setSelect(pre => ({ ...pre, [view]: value }))
 

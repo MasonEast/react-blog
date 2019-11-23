@@ -33,6 +33,7 @@ var option = {
 
     //  图表距边框的距离,可选值：'百分比'¦ {number}（单位px）
     grid: {
+        show: false,
         top: '16%',   // 等价于 y: '16%'
         left: '3%',
         right: '8%',
@@ -55,6 +56,7 @@ var option = {
     xAxis: {
         // name: '周几',
         type: 'category',
+        position: 'bottom',
         axisLine: {
             lineStyle: {
                 // 设置x轴颜色

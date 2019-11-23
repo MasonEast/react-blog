@@ -1,5 +1,6 @@
 let option = {
     title: {
+        show: true,
         text: '基本柱图',
         textStyle: {
             color: '#999'
@@ -8,6 +9,7 @@ let option = {
     color: ['#63B8FF', '#9AFF9A', '#EEAD0E'],
     tooltip: {},
     legend: {
+        show: true,
         right: 30,
         data: ['销量'],
         textStyle: {

@@ -34,7 +34,6 @@ const Chart = (props) => {
     const chartRef = React.useRef()
 
     const { type, id, left, top, deleteChart, selectChart, active, width, height, option } = props
-    console.log(option)
     const [{ isDragging }, drag] = useDrag({
         item: { id, left, top, type: 'box' },
         collect: monitor => ({
@@ -46,7 +45,6 @@ const Chart = (props) => {
         console.log(option, 2)
         chartRef.current.getEchartsInstance().setOption(option)
     }, [option])
-    console.log(option, 3)
     return (
         <div
             className={ClassNames({ 'active': active })}
