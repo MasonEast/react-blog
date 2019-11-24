@@ -3,9 +3,14 @@
 > 一个 React + node 的**初/中级**练习项目：可以多人共用的博客系统
 
 [**在线预览**](http://47.100.38.254/)
+---
 ![图片预览](public/home.png)
+---
+![图片预览](public/tags.png)
+---
 ![图片预览](public/manage.png)
-![图片预览](public/write.png)
+---
+![图片预览](public/charts.png)
 ---
 
 ## 技术栈
