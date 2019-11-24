@@ -12,13 +12,16 @@ import Tabs from '@/components/chartsTemplete/tab'
 import lineBasicOption from '@/components/chartsTemplete/lineBasic'
 import barBasicOption from '@/components/chartsTemplete/barBasic'
 import pieBasicOption from '@/components/chartsTemplete/pieBasic'
+import threeDbarOption from '@/components/chartsTemplete/3dbar'
+import pieFourOption from '@/components/chartsTemplete/pieFour'
+
 
 const Charts = () => {
 
     const chartsType = {                //主要用来展示左侧菜单栏的数据
         Line: ['lineBasic'],
-        Bar: ['barBasic'],
-        Pie: ['pieBasic']
+        Bar: ['barBasic', 'threeDbar'],
+        Pie: ['pieBasic', 'pieFour']
     }
 
     const [fullFlag, setFullFlag] = React.useState(false)       //控制是否全屏的flag
@@ -59,8 +62,14 @@ const Charts = () => {
             case "lineBasic":
                 dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: lineBasicOption })
                 break
+            case "pieFour":
+                dispatch({ type: 'pieFour', id: `pieFour${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieFourOption })
+                break
             case "barBasic":
                 dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: barBasicOption })
+                break
+            case "threeDbar":
+                dispatch({ type: 'threeDbar', id: `threeDbar${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: threeDbarOption })
                 break
             case "pieBasic":
                 dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieBasicOption })
