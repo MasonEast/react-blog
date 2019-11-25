@@ -29,6 +29,7 @@
     "dva": "^2.4.1",
     "echarts": "^4.5.0",
     "echarts-for-react": "^2.0.15-beta.1",
+    "echarts-liquidfill": "^2.0.5",
     "editor.md": "^1.5.0",
     "emotion-theming": "^10.0.19",
     "eslint": "^6.1.0",

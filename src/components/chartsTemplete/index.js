@@ -5,6 +5,8 @@ import { useDrag } from 'react-dnd'
 //import echarts from 'echarts'
 //下面是按需加载
 import echarts from 'echarts/lib/echarts'
+import china from 'echarts/map/js/china'
+import liquidFill from 'echarts-liquidfill'
 //导入折线图
 import 'echarts/lib/chart/line';  //折线图是line,饼图改为pie,柱形图改为bar
 import 'echarts/lib/chart/bar';
@@ -49,7 +51,7 @@ const Chart = (props) => {
         <div
             className={ClassNames({ 'active': active })}
             onDoubleClick={(e) => deleteChart(id)}
-            onClick={() => selectChart(id)}
+            onClick={(e) => selectChart(e, id)}
             ref={drag}
             style={{ ...style, left, top }}
         >

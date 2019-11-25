@@ -1,5 +1,5 @@
 let option = {
-    backgroundColor: '#0e202d',
+    // backgroundColor: '#0e202d',
     tooltip: {},
     xAxis: {
         data: ["企业", "农专", "个体"],

@@ -14,14 +14,17 @@ import barBasicOption from '@/components/chartsTemplete/barBasic'
 import pieBasicOption from '@/components/chartsTemplete/pieBasic'
 import threeDbarOption from '@/components/chartsTemplete/3dbar'
 import pieFourOption from '@/components/chartsTemplete/pieFour'
-
+import chinaMoveOption from '@/components/chartsTemplete/chinaMove'
+import liquidFillChartOption from '@/components/chartsTemplete/liquidFillChart'
+import piePanelOption from '@/components/chartsTemplete/piePanel'
 
 const Charts = () => {
 
     const chartsType = {                //主要用来展示左侧菜单栏的数据
-        Line: ['lineBasic'],
+        Line: ['lineBasic', 'liquidFillChart'],
         Bar: ['barBasic', 'threeDbar'],
-        Pie: ['pieBasic', 'pieFour']
+        Pie: ['pieBasic', 'pieFour', 'piePanel'],
+        China: ['chinaMove']
     }
 
     const [fullFlag, setFullFlag] = React.useState(false)       //控制是否全屏的flag
@@ -74,6 +77,15 @@ const Charts = () => {
             case "pieBasic":
                 dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieBasicOption })
                 break
+            case "piePanel":
+                dispatch({ type: 'piePanel', id: `piePanel${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: piePanelOption })
+                break
+            case "chinaMove":
+                dispatch({ type: 'chinaMove', id: `chinaMove${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: chinaMoveOption })
+                break
+            case "liquidFillChart":
+                dispatch({ type: 'liquidFillChart', id: `liquidFillChart${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: liquidFillChartOption })
+                break
             default:
                 return
         }
@@ -124,9 +136,15 @@ const Charts = () => {
         dispatch({ type: 'delete', id })
     }
 
-    const selectChart = (id) => {                               //设置选中图表， 并添加被选中的样式
+    const selectChart = (e, id) => {                               //设置选中图表， 并添加被选中的样式
+        e.stopPropagation()
         setSelect(chartsObj[id])
         dispatch({ type: "activeClass", id })
+    }
+
+    const cancelSelect = () => {                                //取消选中样式
+        setSelect({})
+        dispatch({ type: "activeClass" })
     }
 
     const changeView = (type, value, id, view, fatherView = '') => { //右侧菜单栏改变对应图表数据的样式
@@ -153,7 +171,7 @@ const Charts = () => {
                             <Button className="charts-left-button" onClick={fullscreen}><Icon type="fullscreen" /></Button>
                     }
                 </div>
-                <div ref={drop} className="charts-middle">
+                <div ref={drop} className="charts-middle" onClick={cancelSelect}>
                     {Object.keys(chartsObj).map(v => {
                         const { left, top, id, type, active, width, height, option } = chartsObj[v]
                         return (
