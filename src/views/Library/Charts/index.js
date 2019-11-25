@@ -17,12 +17,13 @@ import pieFourOption from '@/components/chartsTemplete/pieFour'
 import chinaMoveOption from '@/components/chartsTemplete/chinaMove'
 import liquidFillChartOption from '@/components/chartsTemplete/liquidFillChart'
 import piePanelOption from '@/components/chartsTemplete/piePanel'
+import barHorizontalOption from '@/components/chartsTemplete/barHorizontal'
 
 const Charts = () => {
 
     const chartsType = {                //主要用来展示左侧菜单栏的数据
         Line: ['lineBasic', 'liquidFillChart'],
-        Bar: ['barBasic', 'threeDbar'],
+        Bar: ['barBasic', 'barHorizontal', 'threeDbar'],
         Pie: ['pieBasic', 'pieFour', 'piePanel'],
         China: ['chinaMove']
     }
@@ -55,7 +56,19 @@ const Charts = () => {
                 return { ...state, [id]: { ...state[id], 'option': value } }
             // return { ...state, [id]: { ...state[id], option: { ...state[id]['option'], [fatherView]: { ...state[id]['option'][fatherView], [view]: value } } } }
             default:                                            //默认就是创建一个对应的图表，添加到state中
-                return { ...state, [id]: { id, type, active, left, top, width, height, option } }
+                // return { ...state, [id]: { id, type, active, left, top, width, height, option } }
+                return {
+                    ...state, [id]: {
+                        type,
+                        id,
+                        active: false,
+                        left: 20,
+                        top: 20,
+                        width: width || 500,
+                        height: height || 350,
+                        option
+                    }
+                }
         }
 
     }, {});
@@ -63,28 +76,31 @@ const Charts = () => {
     const createChart = (item) => {                             //创建图表
         switch (item.key) {
             case "lineBasic":
-                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: lineBasicOption })
+                dispatch({ type: 'lineBasic', id: `lineBasic${Object.keys(chartsObj).length}`, width: 300, height: 250, option: lineBasicOption })
                 break
             case "pieFour":
-                dispatch({ type: 'pieFour', id: `pieFour${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieFourOption })
+                dispatch({ type: 'pieFour', id: `pieFour${Object.keys(chartsObj).length}`, option: pieFourOption })
                 break
             case "barBasic":
-                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: barBasicOption })
+                dispatch({ type: 'barBasic', id: `barBasic${Object.keys(chartsObj).length}`, width: 300, height: 250, option: barBasicOption })
+                break
+            case "barHorizontal":
+                dispatch({ type: 'barHorizontal', id: `barHorizontal${Object.keys(chartsObj).length}`, option: barHorizontalOption })
                 break
             case "threeDbar":
-                dispatch({ type: 'threeDbar', id: `threeDbar${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: threeDbarOption })
+                dispatch({ type: 'threeDbar', id: `threeDbar${Object.keys(chartsObj).length}`, option: threeDbarOption })
                 break
             case "pieBasic":
-                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: pieBasicOption })
+                dispatch({ type: 'pieBasic', id: `pieBasic${Object.keys(chartsObj).length}`, width: 300, height: 250, option: pieBasicOption })
                 break
             case "piePanel":
-                dispatch({ type: 'piePanel', id: `piePanel${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: piePanelOption })
+                dispatch({ type: 'piePanel', id: `piePanel${Object.keys(chartsObj).length}`, option: piePanelOption })
                 break
             case "chinaMove":
-                dispatch({ type: 'chinaMove', id: `chinaMove${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: chinaMoveOption })
+                dispatch({ type: 'chinaMove', id: `chinaMove${Object.keys(chartsObj).length}`, width: 700, height: 500, option: chinaMoveOption })
                 break
             case "liquidFillChart":
-                dispatch({ type: 'liquidFillChart', id: `liquidFillChart${Object.keys(chartsObj).length}`, active: false, left: 20, top: 20, width: 300, height: 250, option: liquidFillChartOption })
+                dispatch({ type: 'liquidFillChart', id: `liquidFillChart${Object.keys(chartsObj).length}`, option: liquidFillChartOption })
                 break
             default:
                 return

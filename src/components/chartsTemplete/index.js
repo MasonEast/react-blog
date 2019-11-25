@@ -44,9 +44,9 @@ const Chart = (props) => {
     })
 
     React.useEffect(() => {
-        console.log(option, 2)
         chartRef.current.getEchartsInstance().setOption(option)
     }, [option])
+
     return (
         <div
             className={ClassNames({ 'active': active })}
