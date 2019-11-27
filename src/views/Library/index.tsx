@@ -38,6 +38,11 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                             Charts
                             </Link>
                     </Menu.Item>
+                    <Menu.Item key="typewrting">
+                        <Link to="/library/typewriting">
+                            TypeWrting
+                            </Link>
+                    </Menu.Item>
                 </Menu>
             </div>
             <div className="admin-right">

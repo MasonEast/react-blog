@@ -12,6 +12,7 @@ import Library from '@/views/Library'
 import Canvas from '@/views/Library/Canvas'
 import Paint from '@/views/Library/Paint'
 import Charts from '@/views/Library/Charts'
+import TypeWriting from '@/views/Library/TypeWriting'
 import NotFOUND from '@/views/404'
 
 const routes = [
@@ -74,6 +75,10 @@ const routes = [
                     {
                         path: "/library/charts",
                         component: Charts
+                    },
+                    {
+                        path: "/library/typewriting",
+                        component: TypeWriting
                     },
 
                 ]

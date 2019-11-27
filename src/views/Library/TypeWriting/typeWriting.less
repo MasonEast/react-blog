@@ -1,0 +1,28 @@
+.cursorPoint{
+    position: relative;
+    line-height: 2em;
+    // &::before{
+    //     content: 'aa';
+    //     position: absolute;
+    //     top: 1em;
+    //     left: 0; 
+    // }
+    &::after{
+        content: '|';
+        animation: blink 1s infinite
+    }
+    sup{
+        position: relative;
+        top: -0.5em;
+        // left: -1.5em;
+    }
+}
+
+@keyframes blink{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
