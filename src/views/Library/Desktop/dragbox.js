@@ -17,6 +17,7 @@ const DragBox = (props) => {
             ref={drag}
             className="span-file"
             onDoubleClick={(e) => doubleClick(e, id)}
+            id={id}
         >
             <span>{id}</span>
         </span>

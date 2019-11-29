@@ -18,6 +18,7 @@ const Desktop = () => {
     })
     const [showFileMenu, setShowFileMenu] = useState({
         flag: false,
+        id: '',
         left: 0,
         top: 0
     })
@@ -59,8 +60,9 @@ const Desktop = () => {
     const dragboxDoubleClick = (e, id) => {
         setShowModal(!showModal)
     }
-    const handleClick = () => {
+    const handleClick = (e) => {
         setShowMouseMenu({ ...showMouseMenu, flag: false })
+        setShowFileMenu({ ...setShowFileMenu, flag: false })
     }
 
     const createNewFile = () => {
@@ -70,17 +72,21 @@ const Desktop = () => {
         dispatch({ type: 'create', id: len ? `未命名文件夹(${len})` : '未命名文件夹', left: +left.replace(/px/, ''), top: +top.replace('px', '') })
     }
 
+    const fileRename = () => {
+        const { id } = showFileMenu.id
+        setShowFileMenu({ ...setShowFileMenu, flag: false })
+        console.log(showFileMenu, document.querySelector(`#${showFileMenu.id}`))
+        document.querySelector(`#${showFileMenu.id}`).innerHTML = `<input class=" value=${id} />`
+    }
+
+    const fileDelete = () => {
+        dispatch({ type: 'delete', id: showFileMenu.id })
+        setShowFileMenu({ ...setShowFileMenu, flag: false })
+    }
+
     const handleContextMenu = (e) => {
         e.preventDefault()
         e.persist()
-        if (e.target.className === 'desktop-box') {
-            setShowFileMenu((showFileMenu) => ({ ...showFileMenu, flag: false }))
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, flag: true }))
-        } else {
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, flag: false }))
-            setShowFileMenu((showFileMenu) => ({ ...showFileMenu, flag: true }))
-
-        }
 
         // clientX/Y 获取到的是触发点相对于浏览器可视区域左上角距离
         const clickX = e.clientX - document.querySelector('.desktop-box').offsetLeft
@@ -95,27 +101,18 @@ const Desktop = () => {
         // right为true，说明鼠标点击的位置到浏览器的右边界的宽度可以放下菜单。否则，菜单放到左边。
         // bottom为true，说明鼠标点击位置到浏览器的下边界的高度可以放下菜单。否则，菜单放到上边。
         const right = (screenW - clickX) > rootW
-        const left = !right
         const bottom = (screenH - clickY) > rootH
-        const top = !bottom
 
-        if (right) {
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX}px` }))
-            // menuRef.current.style.left = `${clickX}px`
-        }
-
-        if (left) {
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX - rootW}px` }))
-            // menuRef.current.style.left = `${clickX - rootW}px`
-        }
-
-        if (bottom) {
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY}px` }))
-            // menuRef.current.style.top = `${clickY}px`
-        }
-        if (top) {
-            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY - rootH}px` }))
-            // menuRef.current.style.top = `${clickY - rootH}px`
+        if (e.target.className === 'desktop-box') {
+            setShowFileMenu((showFileMenu) => ({ ...showFileMenu, flag: false }))
+            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, flag: true }))
+            right ? setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX}px` })) : setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX - rootW}px` }))
+            bottom ? setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY}px` })) : setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY - rootH}px` }))
+        } else {
+            setShowMouseMenu((showMouseMenu) => ({ ...showMouseMenu, flag: false }))
+            setShowFileMenu((showFileMenu) => ({ ...showFileMenu, flag: true, id: e.target.innerText }))
+            right ? setShowFileMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX}px` })) : setShowFileMenu((showMouseMenu) => ({ ...showMouseMenu, left: `${clickX - rootW}px` }))
+            bottom ? setShowFileMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY}px` })) : setShowFileMenu((showMouseMenu) => ({ ...showMouseMenu, top: `${clickY - rootH}px` }))
         }
     }
 
@@ -173,9 +170,9 @@ const Desktop = () => {
                         style={{ left: showFileMenu.left, top: showFileMenu.top }}
                         className="mouse-menu"
                     >
-                        <li onClick={createNewFile}>重命名</li>
+                        <li onClick={fileRename}>重命名</li>
                         <li>详情</li>
-                        <li>删除</li>
+                        <li onClick={fileDelete}>删除</li>
                     </ul>
                 }
             </div>

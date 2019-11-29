@@ -6,6 +6,9 @@ export function reducer (state, action) {
             return { ...state, [id]: { ...state[id], left, top } }
         case 'create':
             return { ...state, [id]: { id, left, top } }
+        case 'delete':
+            delete state[id]
+            return { ...state }
         default:
             return state
     }
