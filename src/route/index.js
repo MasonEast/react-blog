@@ -13,6 +13,8 @@ import Canvas from '@/views/Library/Canvas'
 import Paint from '@/views/Library/Paint'
 import Charts from '@/views/Library/Charts'
 import TypeWriting from '@/views/Library/TypeWriting'
+import Desktop from '@/views/Library/Desktop'
+
 import NotFOUND from '@/views/404'
 
 const routes = [
@@ -79,6 +81,10 @@ const routes = [
                     {
                         path: "/library/typewriting",
                         component: TypeWriting
+                    },
+                    {
+                        path: "/library/desktop",
+                        component: Desktop
                     },
 
                 ]

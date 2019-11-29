@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu } from 'antd';
 import { Switch, Link } from 'dva/router';
 import RouteWithSubRoutes from '@/route/RouteWithSubRoutes'
-import '../Admin/index.less'
+import './index.less'
 import { judgeWidth } from '@/utils'
 
 interface Iprops {
@@ -14,7 +14,7 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
     const handleClick = (e: object) => {
     }
     return (
-        <div className="admin-box">
+        <div className="library-box">
             <div className="admin-left">
                 <Menu
                     className="admin-left-menu"
@@ -26,22 +26,27 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                     <Menu.Item key="canvas">
                         <Link to="/library/canvas">
                             Canvas
-                            </Link>
+                        </Link>
                     </Menu.Item>
                     <Menu.Item key="paint">
                         <Link to="/library/paint">
                             Paint
-                            </Link>
+                        </Link>
                     </Menu.Item>
                     <Menu.Item key="charts">
                         <Link to="/library/charts">
                             Charts
-                            </Link>
+                        </Link>
                     </Menu.Item>
-                    <Menu.Item key="typewrting">
+                    <Menu.Item key="typewriting">
                         <Link to="/library/typewriting">
-                            TypeWrting
-                            </Link>
+                            TypeWriting
+                        </Link>
+                    </Menu.Item>
+                    <Menu.Item key="desktop">
+                        <Link to="/library/desktop">
+                            Desktop
+                        </Link>
                     </Menu.Item>
                 </Menu>
             </div>

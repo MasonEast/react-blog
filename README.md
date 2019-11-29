@@ -4,13 +4,20 @@
 
 [**在线预览**](http://47.100.38.254/)
 ---
+home
 ![图片预览](public/home.png)
 ---
+tags
 ![图片预览](public/tags.png)
 ---
+manage
 ![图片预览](public/manage.png)
 ---
+charts
 ![图片预览](public/charts.jpg)
+---
+typewriting
+![图片预览](public/typewriting.gif)
 ---
 
 ## 技术栈

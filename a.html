@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="aaa"></div>
+    <script>
+        const dom = document.querySelector('.aaa')
+        const data = '最简单的打字效果代码'.split('')
+        let index = 0
+        function writing(index) {
+            if (index < data.length) {
+                dom.innerHTML += data[index]
+                setTimeout(writing.bind(this), 200, ++index)
+            }
+        }
+        writing(index)
+    </script>
+</body>
+
+</html>

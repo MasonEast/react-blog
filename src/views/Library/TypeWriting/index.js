@@ -3,20 +3,21 @@ import TypeWrting from './typeWriting'
 import { Input, Button } from 'antd'
 import './index.less'
 
-const data = '现在开始是晚了点，但是总比明天早点......'
+// const data = '现在开始是晚了点，但是总比明天早点......'
 
 const TypeArea = () => {
 
-    const headRef = React.createRef()
+    // const headRef = React.createRef()
     const testRef = React.createRef()
     const [text, setText] = useState('')
     const [speed, setSpeed] = useState(200)
     const [type, setType] = useState('text')
 
-    React.useEffect(() => {
-        let res = new TypeWrting({ content: headRef.current, data, })
-        res.writing()
-    }, [headRef])
+    // React.useEffect(() => {
+    //     headRef.current.innerHTML = ''
+    //     let res = new TypeWrting({ content: headRef.current, data, })
+    //     res.writing()
+    // }, [headRef])
 
     const writeClick = () => {
         testRef.current.innerHTML = ''
@@ -36,7 +37,7 @@ const TypeArea = () => {
 
     return (
         <div className="text-area">
-            <div ref={headRef}></div>
+            {/* <div ref={headRef}></div> */}
             <Input value={text} onChange={e => inputChange(e)} placeholder="请输入一段文本~" />
             <div className="text-speed">
                 <Button onClick={() => setSpeed(50)}>极快</Button>

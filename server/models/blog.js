@@ -40,7 +40,8 @@ module.exports = {
             author,
             content,
             status: statusc,
-            tags: tagsArr
+            tags: tagsArr,
+            date: +Date.now()
         })
     },
 
