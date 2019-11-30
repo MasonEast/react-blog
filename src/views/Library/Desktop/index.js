@@ -63,6 +63,11 @@ const Desktop = () => {
     const handleClick = (e) => {
         setShowMouseMenu({ ...showMouseMenu, flag: false })
         setShowFileMenu({ ...setShowFileMenu, flag: false })
+        // let m = document.querySelector('.span-input')
+        // console.log(showFileMenu.id)
+        // if (document.querySelector('.span-input')) {
+        //     document.querySelector(`#${showFileMenu.id}`).innerHTML = `<span>${m.value}</span>`
+        // }
     }
 
     const createNewFile = () => {
@@ -72,11 +77,12 @@ const Desktop = () => {
         dispatch({ type: 'create', id: len ? `未命名文件夹(${len})` : '未命名文件夹', left: +left.replace(/px/, ''), top: +top.replace('px', '') })
     }
 
-    const fileRename = () => {
+    const fileRename = (e) => {
+        e.stopPropagation()
         const { id } = showFileMenu.id
         setShowFileMenu({ ...setShowFileMenu, flag: false })
         console.log(showFileMenu, document.querySelector(`#${showFileMenu.id}`))
-        document.querySelector(`#${showFileMenu.id}`).innerHTML = `<input class=" value=${id} />`
+        document.querySelector(`#${showFileMenu.id}`).innerHTML = `<input class="span-input" value=${showFileMenu.id} />`
     }
 
     const fileDelete = () => {
