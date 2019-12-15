@@ -14,6 +14,8 @@ manage
 ![图片预览](public/manage.png)
 ---
 charts
+
+左键拖拽， 双击删除， 单击选中， 改变样式（输入框enter）， 全屏
 ![图片预览](public/charts.jpg)
 ---
 typewriting
