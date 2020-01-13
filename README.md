@@ -81,3 +81,5 @@ npm i
 node app
 
 ```
+
+## 使用jenkins完成自动化打包， 部署
