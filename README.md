@@ -22,6 +22,12 @@ typewriting
 ![图片预览](public/typewriting.gif)
 ---
 
+### customLayout
+一个基于`react-grid-layout`和antd的栅格布局实现的自定义布局。
+
+实现功能： 通过拖拽生成布局代码， 直接引到使用antd的项目中即可使用该拖拽生成的布局， 省去了自己慢慢配布局的麻烦
+---
+
 
 ## 技术栈
 react + antd + dva + node + koa + mongoose
@@ -31,7 +37,7 @@ react + antd + dva + node + koa + mongoose
 - [x] 前台：主页 + 列表页 + 标签页 + 博客管理 + 写博客 + 草稿箱
 - [x] 后台：文章管理 + 用户管理
 - [x] 登录注册， 管理自己的个人博客，查看所有发布的博客
-- [x] Library: 一些有意思的东西， 已实现： canvas， 画板， 自定义数据可视化大屏 
+- [x] Library: 一些有意思的东西， 已实现： **canvas**，**画板**， **自定义数据可视化大屏** ， **拖拽自定义布局**
 
 
 ### 目录结构
