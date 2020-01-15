@@ -43,6 +43,11 @@ const Library: React.FC<Iprops> = (props: Iprops) => {
                             TypeWriting
                         </Link>
                     </Menu.Item>
+                    <Menu.Item key="layout">
+                        <Link to="/library/customLayout">
+                            CustomLayout
+                        </Link>
+                    </Menu.Item>
                     <Menu.Item key="desktop">
                         <Link to="/library/desktop">
                             Desktop

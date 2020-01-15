@@ -14,6 +14,7 @@ import Paint from '@/views/Library/Paint'
 import Charts from '@/views/Library/Charts'
 import TypeWriting from '@/views/Library/TypeWriting'
 import Desktop from '@/views/Library/Desktop'
+import CustomLayout from '@/views/Library/SelfDefineLayout'
 
 import NotFOUND from '@/views/404'
 
@@ -81,6 +82,10 @@ const routes = [
                     {
                         path: "/library/typewriting",
                         component: TypeWriting
+                    },
+                    {
+                        path: "/library/customLayout",
+                        component: CustomLayout
                     },
                     {
                         path: "/library/desktop",
