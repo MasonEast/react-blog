@@ -88,7 +88,7 @@ export default class Paint extends React.Component<Iprops, Istate> {
 
         }
         if (e.type === 'mousemove' && isDraw) {
-            locationArr.push([e.pageX - canvas.offsetLeft, e.pageY - mm!.offsetTop - 40])
+            locationArr.push([e.pageX - canvas.offsetLeft, e.pageY - canvas.offsetTop - 100])
 
             switch (active) {
                 case 'pen':
