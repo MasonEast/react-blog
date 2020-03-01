@@ -35,9 +35,10 @@ class Home extends Component {
         const { blogs } = this.props.app
         const { tags, spinFlag } = this.state
         return (
-            <Spin tip="我们正在努力加载哦" indicator={antIcon} spinning={spinFlag}>
-                <div className="home-box">
-                    <div className="home-box-top"></div>
+            <div className="home-box">
+                <div className="home-box-top"></div>
+
+                <Spin tip="我们正在努力加载哦" indicator={antIcon} spinning={spinFlag}>
                     <div className="home-box-left">
                         {
                             blogs.length > 0 && blogs.filter(item => item.status === 0).map(v => {
@@ -85,9 +86,8 @@ class Home extends Component {
 
                         </div>
                     </div>}
-                </div>
-
-            </Spin>
+                </Spin>
+            </div>
         );
     }
 }
