@@ -15,79 +15,84 @@
         // background: url('../../assets/img/dd08a5a61260f7e18f9553d59921cf7e.jpg') center no-repeat ;
         background-size: cover;
     }
-    .home-box-left{
-        width: 60%;
-        height: 100%;
-        box-sizing: border-box;
-        padding-right: 4em;
-        .me-section{
-            height: 2.4rem;
-            position: relative;
-            cursor: pointer;
-            // background-color: #999;
-            border-bottom: 0.01rem solid #bbbaba;
-            transition: all .3s linear;
-            padding: 0.1rem 0.1rem;
-            &:hover{
-                color: rgb(233, 211, 14);
-                background-color: #FFFFFF;
-                box-shadow:0px 0px 4px #333333;
-                border-radius: 10px;
-            }
-            .me-title{
-                color: #333;
-                font-size: 0.24rem;
-                height: 3em;
-                line-height: 3em;
-                &:hover{
-                    color: rgb(31, 188, 228)
+    .ant-spin-nested-loading{
+        .ant-spin-container{
+            .home-box-left{
+                width: 60%;
+                height: 100%;
+                box-sizing: border-box;
+                padding-right: 4em;
+                .me-section{
+                    height: 2.4rem;
+                    position: relative;
+                    cursor: pointer;
+                    // background-color: #999;
+                    border-bottom: 0.01rem solid #bbbaba;
+                    transition: all .3s linear;
+                    padding: 0.1rem 0.1rem;
+                    &:hover{
+                        color: rgb(233, 211, 14);
+                        background-color: #FFFFFF;
+                        box-shadow:0px 0px 4px #333333;
+                        border-radius: 10px;
+                    }
+                    .me-title{
+                        color: #333;
+                        font-size: 0.24rem;
+                        height: 3em;
+                        line-height: 3em;
+                        &:hover{
+                            color: rgb(31, 188, 228)
+                        }
+                    }
+                    .me-detail{
+                        color: #a3a3a3;
+                        font-style: italic;
+                        // text-indent: 2em;
+                        height: 6em;
+                        line-height: 2em;
+                        text-overflow: ellipsis;
+                        // white-space:nowrap;
+                        overflow: hidden;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;      //行数
+                        -webkit-box-orient: vertical;
+                        font-size: 0.16rem;
+                        >h1,h2,h3,h4,h5,h6{
+                            color: #a3a3a3;
+                        }
+                        pre{
+                            height: 6em;
+                            overflow: hidden;
+                            background-color: #f7f7f7;
+                            display: -webkit-box;
+                        -webkit-line-clamp: 3;      //行数
+                        -webkit-box-orient: vertical;
+                        }
+                    }
+                    .me-submitTime{
+                        font-family: Lora,'Times New Roman',serif;
+                        font-style: italic;
+                        font-size: 0.18rem;
+                        color: #666;
+                        position: absolute;
+                        bottom: 0.10rem;
+                        left: 0.10rem;
+                        opacity: 0.4;
+                    }
                 }
             }
-            .me-detail{
-                color: #a3a3a3;
-                font-style: italic;
-                // text-indent: 2em;
-                height: 6em;
-                line-height: 2em;
-                text-overflow: ellipsis;
-                // white-space:nowrap;
-                overflow: hidden;
-                display: -webkit-box;
-                -webkit-line-clamp: 3;      //行数
-                -webkit-box-orient: vertical;
-                font-size: 0.16rem;
-                >h1,h2,h3,h4,h5,h6{
-                    color: #a3a3a3;
+            .home-box-right{
+                width: 20%;
+                height: 100%;
+                .home-box-right-tag{
+                    margin: 5px;
+                    height: 3em;
+                    line-height: 3em;
+                    border: 1px solid #ccc
                 }
-                pre{
-                    height: 6em;
-                    overflow: hidden;
-                    background-color: #f7f7f7;
-                    display: -webkit-box;
-                -webkit-line-clamp: 3;      //行数
-                -webkit-box-orient: vertical;
-                }
-            }
-            .me-submitTime{
-                font-family: Lora,'Times New Roman',serif;
-                font-style: italic;
-                font-size: 0.18rem;
-                color: #666;
-                position: absolute;
-                bottom: 0.10rem;
-                left: 0.10rem;
-                opacity: 0.4;
             }
         }
     }
-    .home-box-right{
-        width: 20%;
-        height: 100%;
-        .home-box-right-tag{
-            margin: 5px;
-            height: 3em;
-            line-height: 3em;
-            border: 1px solid #ccc
-        }
-    }
+
 }
