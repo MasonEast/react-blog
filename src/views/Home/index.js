@@ -38,55 +38,55 @@ class Home extends Component {
             <div className="home-box">
                 <div className="home-box-top"></div>
 
-                <Spin tip="我们正在努力加载哦" indicator={antIcon} spinning={spinFlag}>
-                    <div className="home-box-left">
+                {/* <Spin tip="我们正在努力加载哦" indicator={antIcon} spinning={spinFlag}> */}
+                <div className="home-box-left">
+                    {
+                        blogs.length > 0 && blogs.filter(item => item.status === 0).map(v => {
+                            return (
+                                <Link key={v._id} to={{
+                                    pathname: `/blog/${v._id}`,
+                                }}>
+                                    <section className="me-section">
+                                        <h2 className="me-title">{v.title}</h2>
+                                        <content className="me-detail" dangerouslySetInnerHTML={{ __html: translateMarkdown(v.content) }}>
+                                            {/* {v.content} */}
+                                        </content>
+                                        {judgeWidth() && <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>}
+                                    </section>
+                                </Link>
+                            )
+                        })
+                    }
+                </div>
+                {judgeWidth() && <div className="home-box-right">
+                    <h4 style={{ marginBottom: 16 }}>MY TAGS:</h4>
+                    <div>
                         {
-                            blogs.length > 0 && blogs.filter(item => item.status === 0).map(v => {
+                            tags.map(v => {
+                                //实现随机颜色
                                 return (
-                                    <Link key={v._id} to={{
-                                        pathname: `/blog/${v._id}`,
-                                    }}>
-                                        <section className="me-section">
-                                            <h2 className="me-title">{v.title}</h2>
-                                            <content className="me-detail" dangerouslySetInnerHTML={{ __html: translateMarkdown(v.content) }}>
-                                                {/* {v.content} */}
-                                            </content>
-                                            {judgeWidth() && <p className="me-submitTime">posted by {v.author} on {dateChange(v.date)}</p>}
-                                        </section>
+                                    <Link
+                                        key={v.tag}
+                                        to={{
+                                            pathname: `/tags/${v.tag}`,
+                                            query: v.tag
+                                        }}
+                                    >
+                                        <Tag
+                                            className="home-box-right-tag"
+                                            onClick={this.blogsForTags}
+                                            color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)}
+                                        >
+                                            {v.tag}({v.number})
+                                       </Tag>
                                     </Link>
                                 )
                             })
                         }
-                    </div>
-                    {judgeWidth() && <div className="home-box-right">
-                        <h4 style={{ marginBottom: 16 }}>MY TAGS:</h4>
-                        <div>
-                            {
-                                tags.map(v => {
-                                    //实现随机颜色
-                                    return (
-                                        <Link
-                                            key={v.tag}
-                                            to={{
-                                                pathname: `/tags/${v.tag}`,
-                                                query: v.tag
-                                            }}
-                                        >
-                                            <Tag
-                                                className="home-box-right-tag"
-                                                onClick={this.blogsForTags}
-                                                color={'#' + ('00000' + (Math.random() * 0x1000000 << 0).toString(16)).slice(-6)}
-                                            >
-                                                {v.tag}({v.number})
-                                       </Tag>
-                                        </Link>
-                                    )
-                                })
-                            }
 
-                        </div>
-                    </div>}
-                </Spin>
+                    </div>
+                </div>}
+                {/* </Spin> */}
             </div>
         );
     }
